@@ -2,14 +2,7 @@
 #define GraphSpecialisers_h
 #include "TGraphCommon.h" 
 #include "TGraphAutoCommon.h" 
-
-class TGraphAuto: public TGraph, public TGraphAutoCommon
-{
-  public:
-  TGraphAuto():TGraph(),TGraphAutoCommon(){};
-  ~TGraphAuto(){};
-};
-
+#include "TGraphAuto.h" 
 template <typename T>
 class is_TGraphAuto
 {
