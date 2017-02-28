@@ -6,4 +6,6 @@
 #include "HistoGraphTProfile.h"
 #include "HistoGraphTProfile2D.h"
 #include "HistoGraphTProfile3D.h"
+#include "HistoGraphTGraph.h"
+#include "HistoGraphTGraphAuto.h"
 #endif

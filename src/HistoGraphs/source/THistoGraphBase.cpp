@@ -18,18 +18,6 @@ THistoGraphBase<T>::THistoGraphBase()
 }
 
 template <typename T> 
-void THistoGraphBase<T>::Detach()
-{
-  p_histograph->SetDirectory(nullptr);
-}
-
-template <typename T> 
-void THistoGraphBase<T>::Scale(double d)
-{
-  p_histograph->Scale(d);
-}
-
-template <typename T> 
 THistoGraphBase<T>::~THistoGraphBase()
 {
   delete p_histograph;
@@ -53,3 +41,5 @@ template class THistoGraphBase<TH3D>;
 template class THistoGraphBase<TProfile>; 
 template class THistoGraphBase<TProfile2D>; 
 template class THistoGraphBase<TProfile3D>; 
+template class THistoGraphBase<TGraph>;
+template class THistoGraphBase<TGraphAuto>;

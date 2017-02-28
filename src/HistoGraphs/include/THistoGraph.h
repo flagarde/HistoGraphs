@@ -8,5 +8,4 @@ class THistoGraph: public THistoGraphBase<T>
    THistoGraph();
    virtual ~THistoGraph();
 }; 
-template< typename T, typename debil=T>class THistoGraph;
 #endif 

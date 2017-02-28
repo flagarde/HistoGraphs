@@ -1,6 +1,6 @@
 #ifndef HistoGraphProfile_h
 #define HistoGraphProfile_h
-#include "THistoGraph.h"
+#include "THistoCommon.h"
 template <typename T>
 class is_TProfile
 {
@@ -9,7 +9,7 @@ class is_TProfile
 template <> class is_TProfile<TProfile>{ public :static const bool value =true ;};
 
 template< typename T> 
-class THistoGraph< T, typename std::enable_if<is_TProfile<T>::value,T>::type>:public THistoGraphBase<T>
+class THistoGraph< T, typename std::enable_if<is_TProfile<T>::value,T>::type>:public THistoCommon<T>
 {
   public:
     THistoGraph(){};
