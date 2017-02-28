@@ -1,6 +1,6 @@
-#ifndef Base_h
-#define Base_h
-class Base 
+#ifndef HistoGraphBase_h
+#define HistoGraphBase_h
+class HistoGraphBase
 {
   public:
     virtual void Draw()=0;
@@ -10,6 +10,7 @@ class Base
     virtual void Fill(double x,double w){};
     virtual void Fill(double x,double y,double w){};
     virtual void Fill(double x,double y,double z,double w){};
-    virtual ~Base();
+    virtual void Fill(double x,double y,double z,double t,double w){};
+    virtual ~HistoGraphBase();
 };
 #endif
