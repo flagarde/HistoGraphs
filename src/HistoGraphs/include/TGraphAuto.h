@@ -1,15 +1,10 @@
 #ifndef TGraphAuto_h
 #define TGraphAuto_h
-class TGraphAuto:public TGraph
+#include "TGraphAutoCommon.h" 
+class TGraphAuto: public TGraph, public TGraphAutoCommon
 {
   public:
-  TGraphAuto():TGraph()
-  {
-    nbrPoints=-1;
-  }
-  int getNbrPoints(){return nbrPoints;};
-  void incrementNbrPoints(){++nbrPoints;};
-  protected:
-    int nbrPoints;
+  TGraphAuto():TGraph(),TGraphAutoCommon(){};
+  ~TGraphAuto(){};
 };
 #endif
