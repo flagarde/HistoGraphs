@@ -1,5 +1,5 @@
 #include "HistoSpecialisers.h"
-template class THistoGraph<TH1C>;
+/*template class THistoGraph<TH1C>;
 template class THistoGraph<TH1S>;
 template class THistoGraph<TH1I>;
 template class THistoGraph<TH1F>;
@@ -16,4 +16,4 @@ template class THistoGraph<TH3F>;
 template class THistoGraph<TH3D>; 
 template class THistoGraph<TProfile>;
 template class THistoGraph<TProfile2D>;
-template class THistoGraph<TProfile3D>;
+template class THistoGraph<TProfile3D>;*/

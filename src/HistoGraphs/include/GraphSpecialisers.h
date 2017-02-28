@@ -2,7 +2,7 @@
 #define GraphSpecialisers_h
 #include "TGraphCommon.h" 
 #include "TGraphAutoCommon.h" 
-#include "TGraphAuto.h" 
+#include "TGraphsAuto.h" 
 template <typename T>
 class is_TGraphAuto
 {
@@ -17,7 +17,7 @@ class THistoGraph<T, typename std::enable_if<is_TGraphAuto<T>::value,T>::type>:p
     THistoGraph(){};
     THistoGraph(const char* name,const char* title)
     {
-      this->p_histograph=new TGraphAuto();
+      this->p_histograph=new T();
       this->p_histograph->SetName(name);
       this->p_histograph->SetTitle(title);
     }
@@ -44,7 +44,7 @@ class THistoGraph<T, typename std::enable_if<is_TGraph<T>::value,T>::type>:publi
     {
       this->p_histograph=new T();
       this->p_histograph->SetName(name);
-      this->p_histograph->SetName(title);
+      this->p_histograph->SetTitle(title);
     }
     void SetPoint(int i,double x,double y)
     {

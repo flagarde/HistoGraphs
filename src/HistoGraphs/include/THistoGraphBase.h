@@ -8,7 +8,15 @@
 #include "TProfile2D.h"
 #include "TProfile3D.h"
 #include "TGraph.h"
-#include "TGraphAuto.h"
+#include "TGraph2D.h"
+#include "TGraphErrors.h"
+#include "TGraph2DErrors.h"
+#include "TGraphAsymmErrors.h"
+#include "TGraphBentErrors.h"
+#include "TGraphPolar.h"
+#include "TGraphQQ.h"
+#include "TGraphsAuto.h"
+
 template <typename T>
 class THistoGraphBase : public HistoGraphBase
 {
