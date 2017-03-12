@@ -1,7 +1,6 @@
 #ifndef GraphSpecialisers_h
 #define GraphSpecialisers_h
 #include "TGraphCommon.h" 
-#include "TGraphAutoCommon.h" 
 #include "TGraphsAuto.h" 
 template <typename T>
 class is_TGraphAuto

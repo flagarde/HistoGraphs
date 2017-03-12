@@ -23,7 +23,6 @@ find_package(ROOT REQUIRED)
 include_directories(${ROOT_INCLUDE_DIR})
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/src/Modules/Version.h.in" "${PROJECT_INCLUDE_DIR}/Version.h")
 ADD_SUBDIRECTORY( src/HistoGraphs )
-
 # add a target to generate API documentation with Doxygen
 find_package(Doxygen)
 option(BUILD_DOCUMENTATION "Create and install the HTML based API documentation (requires Doxygen)" ${DOXYGEN_FOUND})

@@ -7,8 +7,14 @@ class THistoCommon: public THistoGraphBase<T>
   public:
     THistoCommon(){};
     virtual ~THistoCommon(){};
+    Bool_t 	Add(TF1 *h1,Double_t c1=1,Option_t* option="");
+    Bool_t 	Add(const TH1 *h1, Double_t c1=1);
+    Bool_t 	Add(const TH1 *h, const TH1 *h2, Double_t c1=1, Double_t c2=1);
+    void 	AddBinContent(Int_t bin);
+    void 	AddBinContent(Int_t bin, Double_t w);
+    Double_t 	AndersonDarlingTest(const TH1 *h2, Option_t *option="") const;
+    Double_t 	AndersonDarlingTest(const TH1 *h2, Double_t &advalue) const;
     void Detach();
-    void Scale(double);
 };
 template class THistoCommon<TH1C>;
 template class THistoCommon<TH1S>;
