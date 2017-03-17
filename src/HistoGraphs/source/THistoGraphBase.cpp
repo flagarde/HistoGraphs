@@ -1,5 +1,7 @@
 #include "THistoGraphBase.h"
 #include "TError.h"
+#include <typeinfo>
+#include "TypesDemangler.h"
 template <typename T> 
 void THistoGraphBase<T>::Draw()
 {
@@ -121,9 +123,8 @@ void THistoGraphBase<T>::Error(const char *method, const char *msgfmt,...) const
 {
   va_list ap;
   va_start(ap,msgfmt);
-  const char *classname = "UnknownClass";
-  if (TROOT::Initialized()) classname = ClassName();
-  ::ErrorHandler(kError, Form("%s::%s", classname, method),msgfmt,ap);
+  std::string classname = type(this);
+  ::ErrorHandler(kError, Form("%s::%s", classname.c_str(), method),msgfmt,ap);
   va_end(ap);
   if (TROOT::Initialized()) gROOT->Message(1002,p_histograph);
 }
@@ -145,9 +146,8 @@ void THistoGraphBase<T>::Fatal(const char *method, const char *msgfmt,...) const
 {
   va_list ap;
   va_start(ap,msgfmt);
-  const char *classname = "UnknownClass";
-  if (TROOT::Initialized()) classname = ClassName();
-  ::ErrorHandler(kFatal, Form("%s::%s", classname, method),msgfmt,ap);
+  std::string classname = type(this);
+  ::ErrorHandler(kFatal, Form("%s::%s",classname.c_str(), method),msgfmt,ap);
   va_end(ap);
   if (TROOT::Initialized()) gROOT->Message(1004,p_histograph);
 }
@@ -181,9 +181,8 @@ void THistoGraphBase<T>::Info(const char *method, const char *msgfmt,...) const
 {
   va_list ap;
   va_start(ap,msgfmt);
-  const char *classname = "UnknownClass";
-  if (TROOT::Initialized()) classname = ClassName();
-  ::ErrorHandler(kInfo, Form("%s::%s", classname, method),msgfmt,ap);
+  std::string classname = type(this);
+  ::ErrorHandler(kInfo, Form("%s::%s",classname.c_str(), method),msgfmt,ap);
   va_end(ap);
 }
 
@@ -306,9 +305,8 @@ void THistoGraphBase<T>::SysError(const char *method, const char *msgfmt,...) co
 {
   va_list ap;
   va_start(ap,msgfmt);
-  const char *classname = "UnknownClass";
-  if (TROOT::Initialized()) classname = ClassName();
-  ::ErrorHandler(kSysError,Form("%s::%s", classname, method),msgfmt,ap);
+  std::string classname = type(this);
+  ::ErrorHandler(kSysError,Form("%s::%s",classname.c_str(), method),msgfmt,ap);
   va_end(ap);
   if (TROOT::Initialized()) gROOT->Message(1003,p_histograph);
 }
@@ -330,9 +328,8 @@ void THistoGraphBase<T>::Warning(const char *method, const char *msgfmt,...) con
 {
   va_list ap;
   va_start(ap,msgfmt);
-  const char *classname = "UnknownClass";
-  if (TROOT::Initialized()) classname = ClassName();
-  ::ErrorHandler(kWarning,Form("%s::%s", classname, method),msgfmt,ap);
+  std::string classname = type(this);
+  ::ErrorHandler(kWarning,Form("%s::%s",classname.c_str(), method),msgfmt,ap);
   va_end(ap);
   if (TROOT::Initialized()) gROOT->Message(1001,p_histograph);
 }
@@ -348,7 +345,212 @@ Int_t THistoGraphBase<T>::Write(const char *name, Int_t option, Int_t bufsize) c
 {
   return p_histograph->Write(name,option,bufsize);
 }
+//TAttLine
+template <typename T> 
+Int_t THistoGraphBase<T>::DistancetoLine(Int_t px, Int_t py, Double_t xp1, Double_t yp1, Double_t xp2, Double_t yp2)
+{
+  return p_histograph->DistancetoLine(px,py,xp1,yp1,xp2,yp2);
+}
 
+template <typename T> 
+Color_t THistoGraphBase<T>::GetLineColor() const
+{
+  return p_histograph->GetLineColor();
+}
+
+template <typename T> 
+Style_t THistoGraphBase<T>::GetLineStyle() const 
+{
+  return p_histograph->GetLineStyle();
+}
+
+template <typename T> 
+Width_t THistoGraphBase<T>::GetLineWidth() const 
+{
+  return p_histograph->GetLineWidth();
+}
+
+template <typename T> 
+void THistoGraphBase<T>::ResetAttLine(Option_t *option)
+{
+  p_histograph->ResetAttLine(option);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SaveLineAttributes(std::ostream &out, const char *name, Int_t coldef, Int_t stydef, Int_t widdef)
+{
+  p_histograph->SaveLineAttributes(out,name,coldef,stydef,widdef);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetLineAttributes()
+{
+  p_histograph->SetLineAttributes();
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetLineColor(Color_t lcolor)
+{
+  p_histograph->SetLineColor(lcolor);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetLineColorAlpha (Color_t lcolor, Float_t lalpha)
+{
+  p_histograph->SetLineColorAlpha (lcolor,lalpha);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetLineStyle(Style_t lstyle)
+{
+  p_histograph->SetLineStyle(lstyle);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetLineWidth(Width_t lwidth)
+{
+  p_histograph->SetLineWidth(lwidth);
+}
+
+//TAttFill
+template <typename T> 
+Color_t THistoGraphBase<T>::GetFillColor() const
+{
+  return p_histograph->GetFillColor();
+}
+
+template <typename T> 
+Style_t THistoGraphBase<T>::GetFillStyle() const
+{
+  return p_histograph->GetFillStyle();
+}
+
+template <typename T> 
+Bool_t THistoGraphBase<T>::IsTransparent() const
+{
+  return p_histograph->IsTransparent();
+}
+
+template <typename T> 
+void THistoGraphBase<T>::ResetAttFill(Option_t *option)
+{
+  p_histograph->ResetAttFill(option);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SaveFillAttributes(std::ostream &out, const char *name, Int_t coldef, Int_t stydef)
+{
+  p_histograph->SaveFillAttributes(out,name,coldef,stydef);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetFillAttributes()
+{
+  p_histograph->SetFillAttributes();
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetFillColor(Color_t fcolor)
+{
+  p_histograph->SetFillColor(fcolor);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetFillColorAlpha(Color_t fcolor, Float_t falpha)
+{
+  p_histograph->SetFillColorAlpha(fcolor,falpha);
+}
+
+template <typename T> 
+void THistoGraphBase<T>::SetFillStyle(Style_t fstyle)
+{
+  p_histograph->SetFillStyle(fstyle);
+}
+//TAttMaker
+template <typename T> 
+Color_t THistoGraphBase<T>::GetMarkerColor() const
+{
+  return p_histograph->GetMarkerColor();
+}
+
+template <typename T> 
+Size_t THistoGraphBase<T>::GetMarkerSize() const
+{
+  return p_histograph->GetMarkerSize();
+}
+
+template <typename T> 
+Style_t THistoGraphBase<T>::GetMarkerStyle() const
+{
+  return p_histograph->GetMarkerStyle();
+}   
+   
+template <typename T> 
+void THistoGraphBase<T>::ResetAttMarker(Option_t *toption)
+{
+  p_histograph->ResetAttMarker(toption);
+}   
+   
+template <typename T> 
+void THistoGraphBase<T>::SaveMarkerAttributes(std::ostream &out, const char *name, Int_t coldef, Int_t stydef, Int_t sizdef)
+{
+  p_histograph->SaveMarkerAttributes(out,name,coldef,stydef,sizdef);
+}   
+   
+template <typename T> 
+void THistoGraphBase<T>::SetMarkerAttributes()
+{
+  p_histograph->SetMarkerAttributes();
+}   
+   
+template <typename T> 
+void THistoGraphBase<T>::SetMarkerColor(Color_t mcolor)
+{
+  p_histograph->SetMarkerColor(mcolor);
+}   
+   
+template <typename T> 
+void THistoGraphBase<T>::SetMarkerColorAlpha(Color_t mcolor, Float_t malpha)
+{
+  p_histograph->SetMarkerColorAlpha(mcolor,malpha);
+}   
+   
+template <typename T> 
+void THistoGraphBase<T>::SetMarkerSize(Size_t msize)
+{
+  p_histograph->SetMarkerSize(msize);
+}   
+   
+template <typename T> 
+void THistoGraphBase<T>::SetMarkerStyle(Style_t mstyle)
+{
+  p_histograph->SetMarkerStyle(mstyle);
+}    
+//vitual TObject
+template <typename T> 
+Long_t THistoGraphBase<T>::GetDtorOnly()
+{
+  return p_histograph->GetDtorOnly();
+}  
+
+template <typename T> 
+Bool_t THistoGraphBase<T>::GetObjectStat()
+{
+  return p_histograph->GetObjectStat();
+}  
+
+template <typename T> 
+void THistoGraphBase<T>::SetDtorOnly(void *obj)
+{
+  p_histograph->SetDtorOnly(obj);
+}  
+
+template <typename T> 
+void THistoGraphBase<T>::SetObjectStat(Bool_t stat)
+{
+  p_histograph->SetObjectStat(stat);
+}  
+//
 template class THistoGraphBase<TH1C>;
 template class THistoGraphBase<TH1S>;
 template class THistoGraphBase<TH1I>;

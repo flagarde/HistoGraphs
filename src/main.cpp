@@ -2,6 +2,7 @@
 #include "TFile.h"
 #include <map>
 #include "HistoPlane.h"
+#include "TObjectTable.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -16,8 +17,13 @@ int main(int argc, char *argv[])
   std::map<int,HistoGraphBase*> n;
   n[1]= new THistoGraph<TH1C>("TH1C","TH1C",100,0,100);
   n[2]= new THistoGraph<TH1S>("TH1S","TH1S",100,0,100);
-  n[3]= new THistoGraph<TH1I>("TH1I","TH1I",100,0,100);
-  n[3]->Warning("rrrr","kkkk","lllll");
+  n[3]= new THistoGraph<TH1I>("Titi","Toto",100,0,100);
+  //n[3]->Warning("rrrr","kkkk","lllll");
+  n[3]->Fill(1.0);
+  n[3]->SetLineColor(kRed);
+  n[3]->SetFillColor(kRed);
+  n[3]->SetMarkerStyle(kCircle);
+  //std::cout<<n[3]->GetTitle()<<" "<<n[3]->GetName();
   /*n[4]= new THistoGraph<TH1F>("TH1F","TH1F",100,0,100);
   n[5]= new THistoGraph<TH1D>("TH1D","TH1D",100,0,100);
   n[6]= new THistoGraph<TH2C>("TH2C","TH2C",100,0,100,100,0,100);
@@ -52,12 +58,12 @@ int main(int argc, char *argv[])
   n[15]->FillRandom("x+y+z*z", 10000);
   n[16]->FillRandom("gaus", 10000);
   n[17]->FillRandom("x+y", 10000);
-  n[18]->FillRandom("x+y+z*z", 10000);
+  n[18]->FillRandom("x+y+z*z", 10000);*/
   for(std::map<int,HistoGraphBase*>::iterator it=n.begin();it!=n.end();++it)
   {
    it->second->Write();
    delete it->second;
-  }*/
+  }
   return 0;
 }
 

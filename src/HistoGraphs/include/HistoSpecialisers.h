@@ -22,6 +22,7 @@ class THistoGraph< T, typename std::enable_if<is_TH1<T>::value,T>::type>:public 
     {
       this->p_histograph=new T(name,title,bin,x,y);
       this->Detach();
+      this->SetObjectStat(false);
     }
     void Fill( Double_t  x,  Double_t  w)
     {
@@ -53,6 +54,7 @@ class THistoGraph<T, typename std::enable_if<is_TH2<T>::value,T>::type>:public T
     {
       this->p_histograph=new T(name,title,bin,xmin,xmax,biny,ymin,ymax);
       this->Detach();
+      this->SetObjectStat(false);
     }
     void Fill( Double_t  x,  Double_t  w)
     {
@@ -84,6 +86,7 @@ class THistoGraph<T, typename std::enable_if<is_TH3<T>::value,T>::type>:public T
     {
       this->p_histograph=new T(name,title,bin,xmin,xmax,biny,ymin,ymax,binz,zmin,zmax);
       this->Detach();
+      this->SetObjectStat(false);
     }
     void Fill( Double_t  x,  Double_t  y,  Double_t  z)
     {
@@ -111,6 +114,7 @@ class THistoGraph< T, typename std::enable_if<is_TProfile<T>::value,T>::type>:pu
     {
       this->p_histograph=new T(name,title,bin,x,y);
       this->Detach();
+      this->SetObjectStat(false);
     }
     void Fill( Double_t  x,  Double_t  y)
     {
@@ -138,6 +142,7 @@ class THistoGraph< T, typename std::enable_if<is_TProfile2D<T>::value,T>::type>:
     {
       this->p_histograph=new T(name,title,bin,xmin,xmax,biny,ymin,ymax);
       this->Detach();
+      this->SetObjectStat(false);
     }
     void Fill( Double_t  x,  Double_t  y, Double_t  z)
     {
@@ -165,6 +170,7 @@ class THistoGraph< T, typename std::enable_if<is_TProfile3D<T>::value,T>::type>:
     {
       this->p_histograph=new T(name,title,bin,xmin,xmax,biny,ymin,ymax,binz,zmin,zmax);
       this->Detach();
+      this->SetObjectStat(false);
     }
     void Fill( Double_t  x,  Double_t  y, Double_t  z,  Double_t  t)
     {

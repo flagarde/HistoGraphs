@@ -1,2 +1,2 @@
 #include "HistoGraphBase.h"
-HistoGraphBase::~HistoGraphBase(){}
+HistoGraphBase::~HistoGraphBase(){};

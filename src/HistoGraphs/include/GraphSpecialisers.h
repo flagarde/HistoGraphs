@@ -17,6 +17,7 @@ class THistoGraph<T, typename std::enable_if<is_TGraphAuto<T>::value,T>::type>:p
     THistoGraph(const char* name,const char* title)
     {
       this->p_histograph=new T();
+      this->SetObjectStat(false);
       this->p_histograph->SetName(name);
       this->p_histograph->SetTitle(title);
     }
@@ -42,6 +43,7 @@ class THistoGraph<T, typename std::enable_if<is_TGraph<T>::value,T>::type>:publi
     THistoGraph(const char* name,const char* title)
     {
       this->p_histograph=new T();
+      this->SetObjectStat(false);
       this->p_histograph->SetName(name);
       this->p_histograph->SetTitle(title);
     }

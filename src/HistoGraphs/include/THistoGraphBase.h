@@ -19,11 +19,12 @@
 #include "TGraphsAuto.h"
 
 template <typename T>
-class THistoGraphBase : public HistoGraphBase
+class THistoGraphBase: public HistoGraphBase
 {
   public:
    THistoGraphBase();
    ~THistoGraphBase();
+   T*operator->() const { return p_histograph; }
    //TNamed
    void Clear(Option_t *option="");
    Int_t Compare(const TObject *obj) const;
@@ -76,6 +77,44 @@ class THistoGraphBase : public HistoGraphBase
    void Warning(const char *method, const char *msgfmt,...) const;
    Int_t Write(const char *name=0, Int_t option=0, Int_t bufsize=0);
    Int_t Write(const char *name=0, Int_t option=0, Int_t bufsize=0) const;
+   //TAttLine
+   Int_t DistancetoLine(Int_t px, Int_t py, Double_t xp1, Double_t yp1, Double_t xp2, Double_t yp2);
+   Color_t GetLineColor() const;
+   Style_t GetLineStyle() const;
+   Width_t GetLineWidth() const;
+   void ResetAttLine(Option_t *option="");
+   void SaveLineAttributes(std::ostream &out, const char *name, Int_t coldef=1, Int_t stydef=1, Int_t widdef=1);
+   void SetLineAttributes();
+   void SetLineColor(Color_t lcolor);
+   void SetLineColorAlpha (Color_t lcolor, Float_t lalpha);
+   void SetLineStyle(Style_t lstyle);
+   void SetLineWidth(Width_t lwidth);
+   //TAttFill
+   Color_t GetFillColor() const;
+   Style_t GetFillStyle() const;
+   Bool_t IsTransparent() const;
+   void ResetAttFill(Option_t *option="");
+   void SaveFillAttributes(std::ostream &out, const char *name, Int_t coldef=1, Int_t stydef=1001);
+   void SetFillAttributes();
+   void SetFillColor(Color_t fcolor);
+   void SetFillColorAlpha(Color_t fcolor, Float_t falpha);
+   void SetFillStyle(Style_t fstyle);
+   //TAttMaker
+   Color_t GetMarkerColor() const;
+   Size_t GetMarkerSize() const;
+   Style_t GetMarkerStyle() const;
+   void ResetAttMarker(Option_t *toption="");
+   void SaveMarkerAttributes(std::ostream &out, const char *name, Int_t coldef=1, Int_t stydef=1, Int_t sizdef=1);
+   void SetMarkerAttributes();
+   void SetMarkerColor(Color_t mcolor=1);
+   void SetMarkerColorAlpha(Color_t mcolor, Float_t malpha);
+   void SetMarkerSize(Size_t msize=1);
+   void SetMarkerStyle(Style_t mstyle=1);
+   //vitual TObject
+   Long_t GetDtorOnly();
+   Bool_t GetObjectStat();
+   void SetDtorOnly(void *obj);
+   void SetObjectStat(Bool_t stat); 
    //
    void Draw();
   protected:
