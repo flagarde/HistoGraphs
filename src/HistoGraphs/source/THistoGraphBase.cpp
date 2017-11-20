@@ -3,9 +3,9 @@
 #include <typeinfo>
 #include "TypesDemangler.h"
 template <typename T> 
-void THistoGraphBase<T>::Draw()
+void THistoGraphBase<T>::Draw(Option_t* option)
 {
-  if(p_histograph!=nullptr) p_histograph->Draw();
+  if(p_histograph!=nullptr) p_histograph->Draw(option);
 }
 
 //TNamed
@@ -570,18 +570,10 @@ template class THistoGraphBase<TProfile>;
 template class THistoGraphBase<TProfile2D>; 
 template class THistoGraphBase<TProfile3D>; 
 template class THistoGraphBase<TGraph>;
-template class THistoGraphBase<TGraphAuto>;
 template class THistoGraphBase<TGraph2D>;
-template class THistoGraphBase<TGraph2DAuto>;
 template class THistoGraphBase<TGraphErrors>;
-template class THistoGraphBase<TGraphErrorsAuto>;
 template class THistoGraphBase<TGraph2DErrors>;
-template class THistoGraphBase<TGraph2DErrorsAuto>;
 template class THistoGraphBase<TGraphAsymmErrors>;
-template class THistoGraphBase<TGraphAsymmErrorsAuto>;
 template class THistoGraphBase<TGraphBentErrors>;
-template class THistoGraphBase<TGraphBentErrorsAuto>;
 template class THistoGraphBase<TGraphPolar>;
-template class THistoGraphBase<TGraphPolarAuto>;
 template class THistoGraphBase<TGraphQQ>;
-template class THistoGraphBase<TGraphQQAuto>;

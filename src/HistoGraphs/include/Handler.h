@@ -60,7 +60,7 @@ class Handler
     }
     void setName(int Item,const char* name)
     {
-      if(Item>=NbrItem.size())
+      if((unsigned int)Item>=NbrItem.size())
       {
         std::cout<<"Error!!! Trying to name "<<Item<<"th element but I have only "<<NbrItem.size()<<" elements"<<std::endl;
       }

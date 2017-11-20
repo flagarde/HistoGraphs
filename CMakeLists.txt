@@ -22,7 +22,7 @@ list( APPEND CMAKE_MODULE_PATH $ENV{ROOTSYS}/etc/cmake/)
 find_package(ROOT REQUIRED)
 include_directories(${ROOT_INCLUDE_DIR})
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/src/Modules/Version.h.in" "${PROJECT_INCLUDE_DIR}/Version.h")
-ADD_SUBDIRECTORY( src/fmt )
+#ADD_SUBDIRECTORY( src/fmt )
 ADD_SUBDIRECTORY( src/HistoGraphs )
 # add a target to generate API documentation with Doxygen
 find_package(Doxygen)
@@ -41,7 +41,7 @@ if(BUILD_DOCUMENTATION)
         COMMENT "Generating API documentation with Doxygen"
         VERBATIM)
 
-    install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/doc/html DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/doc)
+ #   install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/doc/html DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/doc)
 endif()
 ADD_EXECUTABLE( Main ./src/main.cpp)
 TARGET_LINK_LIBRARIES( Main Histographs)

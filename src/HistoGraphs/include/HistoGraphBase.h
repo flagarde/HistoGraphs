@@ -2,6 +2,10 @@
 #define HistoGraphBase_h
 #include "TF1.h"
 #include "TH1.h"
+#include "TH2.h"
+#include "TH3.h"
+#include "TProfile.h"
+#include "TProfile2D.h"
 #include "TROOT.h"
 
 class HistoGraphBase
@@ -23,7 +27,7 @@ class HistoGraphBase
     virtual const char * ClassName() const=0;
     virtual void Delete(Option_t *option="")=0;
     virtual void DrawClass() const=0;
- 	  virtual TObject * DrawClone(Option_t *option="") const=0;
+    virtual TObject * DrawClone(Option_t *option="") const=0;
     virtual void Dump() const =0;
     virtual void Error(const char *method, const char *msgfmt,...) const=0;
     virtual void Execute(const char *method, const char *params, Int_t *error=0)=0;
@@ -97,236 +101,465 @@ class HistoGraphBase
     virtual Bool_t GetObjectStat()=0;
     virtual void SetDtorOnly(void *obj)=0;
     virtual void SetObjectStat(Bool_t stat)=0; 
-    bool isTH1F(){return true;};
     //TH1  
-    /*virtual Bool_t 	Add (TF1 *h1, Double_t c1=1, Option_t *option="")
-    virtual Bool_t 	Add (const TH1 *h1, Double_t c1=1)
-    virtual Bool_t 	Add (const TH1 *h, const TH1 *h2, Double_t c1=1, Double_t c2=1)
-    virtual void 	AddBinContent (Int_t bin)
-    virtual void 	AddBinContent (Int_t bin, Double_t w)
-    virtual Double_t 	AndersonDarlingTest (const TH1 *h2, Option_t *option="") const
-    virtual Double_t 	AndersonDarlingTest (const TH1 *h2, Double_t &advalue) const
-    virtual void 	Browse (TBrowser *b) 
-    virtual Int_t 	BufferEmpty (Int_t action=0)
-    virtual Bool_t 	CanExtendAllAxes () const
-    virtual Double_t 	Chi2Test (const TH1 *h2, Option_t *option="UU", Double_t *res=0) const
-    virtual Double_t 	Chi2TestX (const TH1 *h2, Double_t &chi2, Int_t &ndf, Int_t &igood, Option_t *option="UU", Double_t *res=0) const
-    virtual Double_t 	Chisquare (TF1 *f1, Option_t *option="") const
-    virtual void 	ClearUnderflowAndOverflow ()
-    TObject * 	Clone (const char *newname=0) const
-    virtual Double_t 	ComputeIntegral (Bool_t onlyPositive=false)
-    virtual void 	Copy (TObject &hnew) const
-    virtual void 	DirectoryAutoAdd (TDirectory *)
-    virtual Int_t 	DistancetoPrimitive (Int_t px, Int_t py)
-    virtual Bool_t 	Divide (TF1 *f1, Double_t c1=1)
-    virtual Bool_t 	Divide (const TH1 *h1)
-    virtual Bool_t 	Divide (const TH1 *h1, const TH1 *h2, Double_t c1=1, Double_t c2=1, Option_t *option="")
-    virtual void 	Draw (Option_t *option="")
-    virtual TH1 * 	DrawCopy (Option_t *option="", const char *name_postfix="_copy") const
-    virtual TH1 * 	DrawNormalized (Option_t *option="", Double_t norm=1) const
-    virtual void 	DrawPanel ()
-    virtual void 	Eval (TF1 *f1, Option_t *option="")
-    virtual void 	ExecuteEvent (Int_t event, Int_t px, Int_t py)
-    virtual void 	ExtendAxis (Double_t x, TAxis *axis)
-    virtual TH1 * 	FFT (TH1 *h_output, Option_t *option)
-    virtual Int_t 	Fill (Double_t x)
-    virtual Int_t 	Fill (Double_t x, Double_t w)
-    virtual Int_t 	Fill (const char *name, Double_t w)
-    virtual void 	FillN (Int_t ntimes, const Double_t *x, const Double_t *w, Int_t stride=1)
-    virtual void 	FillN (Int_t, const Double_t *, const Double_t *, const Double_t *, Int_t)
-    virtual void 	FillRandom (const char *fname, Int_t ntimes=5000)
-    virtual void 	FillRandom (TH1 *h, Int_t ntimes=5000)
-    virtual Int_t 	FindBin (Double_t x, Double_t y=0, Double_t z=0)
-    virtual Int_t 	FindFirstBinAbove (Double_t threshold=0, Int_t axis=1) const
-    virtual Int_t 	FindFixBin (Double_t x, Double_t y=0, Double_t z=0) const
-    virtual Int_t 	FindLastBinAbove (Double_t threshold=0, Int_t axis=1) const
-    virtual TObject * 	FindObject (const char *name) const 
-    virtual TObject * 	FindObject (const TObject *obj) const
-    virtual TFitResultPtr 	Fit (const char *formula, Option_t *option="", Option_t *goption="", Double_t xmin=0, Double_t xmax=0)
-    virtual TFitResultPtr 	Fit (TF1 *f1, Option_t *option="", Option_t *goption="", Double_t xmin=0, Double_t xmax=0)
-    virtual void 	FitPanel ()
-    TH1 * 	GetAsymmetry (TH1 *h2, Double_t c2=1, Double_t dc2=0)
-    virtual Color_t 	GetAxisColor (Option_t *axis="X") const
-    virtual Float_t 	GetBarOffset () const
-    virtual Float_t 	GetBarWidth () const
-    virtual Int_t 	GetBin (Int_t binx, Int_t biny=0, Int_t binz=0) const
-    virtual Double_t 	GetBinCenter (Int_t bin) const
-    virtual Double_t 	GetBinContent (Int_t bin) const
-    virtual Double_t 	GetBinContent (Int_t bin, Int_t) const
-    virtual Double_t 	GetBinContent (Int_t bin, Int_t, Int_t) const
-    virtual Double_t 	GetBinError (Int_t bin) const
-    virtual Double_t 	GetBinError (Int_t binx, Int_t biny) const
-    virtual Double_t 	GetBinError (Int_t binx, Int_t biny, Int_t binz) const
-    virtual Double_t 	GetBinErrorLow (Int_t bin) const
-    virtual EBinErrorOpt 	GetBinErrorOption () const
-    virtual Double_t 	GetBinErrorUp (Int_t bin) const
-    virtual Double_t 	GetBinLowEdge (Int_t bin) const
-    virtual Double_t 	GetBinWidth (Int_t bin) const
-    virtual Double_t 	GetBinWithContent (Double_t c, Int_t &binx, Int_t firstx=0, Int_t lastx=0, Double_t maxdiff=0) const
-    virtual void 	GetBinXYZ (Int_t binglobal, Int_t &binx, Int_t &biny, Int_t &binz) const
-    const Double_t * 	GetBuffer () const
-    Int_t 	GetBufferLength () const
-    Int_t 	GetBufferSize () const
-    virtual Double_t 	GetCellContent (Int_t binx, Int_t biny) const
-    virtual Double_t 	GetCellError (Int_t binx, Int_t biny) const
-    virtual void 	GetCenter (Double_t *center) const
-    virtual Int_t 	GetContour (Double_t *levels=0)
-    virtual Double_t 	GetContourLevel (Int_t level) const
-    virtual Double_t 	GetContourLevelPad (Int_t level) const
-    TH1 * 	GetCumulative (Bool_t forward=kTRUE, const char *suffix="_cumulative") const
-    virtual Int_t 	GetDimension () const
-    TDirectory * 	GetDirectory () const
-    virtual Double_t 	GetEffectiveEntries () const
-    virtual Double_t 	GetEntries () const
-    virtual TF1 * 	GetFunction (const char *name) const
-    virtual Double_t * 	GetIntegral ()
-    virtual Double_t 	GetKurtosis (Int_t axis=1) const
-    virtual Color_t 	GetLabelColor (Option_t *axis="X") const
-    virtual Style_t 	GetLabelFont (Option_t *axis="X") const
-    virtual Float_t 	GetLabelOffset (Option_t *axis="X") const
-    virtual Float_t 	GetLabelSize (Option_t *axis="X") const
-    TList * 	GetListOfFunctions () const
-    virtual void 	GetLowEdge (Double_t *edge) const
-    virtual Double_t 	GetMaximum (Double_t maxval=FLT_MAX) const
-    virtual Int_t 	GetMaximumBin () const
-    virtual Int_t 	GetMaximumBin (Int_t &locmax, Int_t &locmay, Int_t &locmaz) const
-    virtual Double_t 	GetMaximumStored () const
-    virtual Double_t 	GetMean (Int_t axis=1) const
-    virtual Double_t 	GetMeanError (Int_t axis=1) const
-    virtual Double_t 	GetMinimum (Double_t minval=-FLT_MAX) const
-    virtual void 	GetMinimumAndMaximum (Double_t &min, Double_t &max) const
-    virtual Int_t 	GetMinimumBin () const
-    virtual Int_t 	GetMinimumBin (Int_t &locmix, Int_t &locmiy, Int_t &locmiz) const
-    virtual Double_t 	GetMinimumStored () const
-    virtual Int_t 	GetNbinsX () const
-    virtual Int_t 	GetNbinsY () const
-    virtual Int_t 	GetNbinsZ () const
-    virtual Int_t 	GetNcells () const
-    virtual Int_t 	GetNdivisions (Option_t *axis="X") const
-    virtual Double_t 	GetNormFactor () const
-    virtual char * 	GetObjectInfo (Int_t px, Int_t py) const
-    Option_t * 	GetOption () const
-    TVirtualHistPainter * 	GetPainter (Option_t *option="")
-    virtual Int_t 	GetQuantiles (Int_t nprobSum, Double_t *q, const Double_t *probSum=0)
-    virtual Double_t 	GetRandom () const
-    Double_t 	GetRMS (Int_t axis=1) const
-    Double_t 	GetRMSError (Int_t axis=1) const
-    virtual Double_t 	GetSkewness (Int_t axis=1) const
-    virtual void 	GetStats (Double_t *stats) const
-    virtual Double_t 	GetStdDev (Int_t axis=1) const
-    virtual Double_t 	GetStdDevError (Int_t axis=1) const
-    virtual Double_t 	GetSumOfWeights () const
-    virtual TArrayD * 	GetSumw2 ()
-    virtual const TArrayD * 	GetSumw2 () const
-    virtual Int_t 	GetSumw2N () const
-    virtual Float_t 	GetTickLength (Option_t *axis="X") const
-    virtual Style_t 	GetTitleFont (Option_t *axis="X") const
-    virtual Float_t 	GetTitleOffset (Option_t *axis="X") const
-    virtual Float_t 	GetTitleSize (Option_t *axis="X") const
-    TAxis * 	GetXaxis ()
-    const TAxis * 	GetXaxis () const
-    TAxis * 	GetYaxis ()
-    const TAxis * 	GetYaxis () const
-    TAxis * 	GetZaxis ()
-    const TAxis * 	GetZaxis () const
-    virtual Double_t 	Integral (Option_t *option="") const
-virtual Double_t 	Integral (Int_t binx1, Int_t binx2, Option_t *option="") const
-virtual Double_t 	IntegralAndError (Int_t binx1, Int_t binx2, Double_t &err, Option_t *option="") const
-virtual Double_t 	Interpolate (Double_t x)
-virtual Double_t 	Interpolate (Double_t x, Double_t y)
-virtual Double_t 	Interpolate (Double_t x, Double_t y, Double_t z)
-Bool_t 	IsBinOverflow (Int_t bin, Int_t axis=0) const
-Bool_t 	IsBinUnderflow (Int_t bin, Int_t axis=0) const
-virtual Double_t 	KolmogorovTest (const TH1 *h2, Option_t *option="") const
-virtual void 	LabelsDeflate (Option_t *axis="X")
-virtual void 	LabelsInflate (Option_t *axis="X")
-virtual void 	LabelsOption (Option_t *option="h", Option_t *axis="X")
-virtual Long64_t 	Merge (TCollection *list)
-virtual Bool_t 	Multiply (TF1 *h1, Double_t c1=1)
-virtual Bool_t 	Multiply (const TH1 *h1)
-virtual Bool_t 	Multiply (const TH1 *h1, const TH1 *h2, Double_t c1=1, Double_t c2=1, Option_t *option="")
-virtual void 	Paint (Option_t *option="")
-virtual void 	Print (Option_t *option="") const
-virtual void 	PutStats (Double_t *stats)
-virtual TH1 * 	Rebin (Int_t ngroup=2, const char *newname="", const Double_t *xbins=0)
-virtual void 	RebinAxis (Double_t x, TAxis *axis)
-virtual TH1 * 	RebinX (Int_t ngroup=2, const char *newname="")
-virtual void 	Rebuild (Option_t *option="")
-virtual void 	RecursiveRemove (TObject *obj)
-virtual void 	Reset (Option_t *option="")
-virtual void 	ResetStats ()
-virtual void 	SavePrimitive (std::ostream &out, Option_t *option="")
-virtual void 	Scale (Double_t c1=1, Option_t *option="")
-virtual void 	SetAxisColor (Color_t color=1, Option_t *axis="X")
-virtual void 	SetAxisRange (Double_t xmin, Double_t xmax, Option_t *axis="X")
-virtual void 	SetBarOffset (Float_t offset=0.25)
-virtual void 	SetBarWidth (Float_t width=0.5)
-virtual void 	SetBinContent (Int_t bin, Double_t content)
-virtual void 	SetBinContent (Int_t bin, Int_t, Double_t content)
-virtual void 	SetBinContent (Int_t bin, Int_t, Int_t, Double_t content)
-virtual void 	SetBinError (Int_t bin, Double_t error)
-virtual void 	SetBinError (Int_t binx, Int_t biny, Double_t error)
-virtual void 	SetBinError (Int_t binx, Int_t biny, Int_t binz, Double_t error)
-virtual void 	SetBinErrorOption (EBinErrorOpt type)
-virtual void 	SetBins (Int_t nx, Double_t xmin, Double_t xmax)
-virtual void 	SetBins (Int_t nx, const Double_t *xBins)
-virtual void 	SetBins (Int_t nx, Double_t xmin, Double_t xmax, Int_t ny, Double_t ymin, Double_t ymax)
-virtual void 	SetBins (Int_t nx, const Double_t *xBins, Int_t ny, const Double_t *yBins)
-virtual void 	SetBins (Int_t nx, Double_t xmin, Double_t xmax, Int_t ny, Double_t ymin, Double_t ymax, Int_t nz, Double_t zmin, Double_t zmax)
-virtual void 	SetBins (Int_t nx, const Double_t *xBins, Int_t ny, const Double_t *yBins, Int_t nz, const Double_t *zBins)
-virtual void 	SetBinsLength (Int_t=-1)
-virtual void 	SetBuffer (Int_t buffersize, Option_t *option="")
-virtual UInt_t 	SetCanExtend (UInt_t extendBitMask)
-virtual void 	SetCellContent (Int_t binx, Int_t biny, Double_t content)
-virtual void 	SetCellError (Int_t binx, Int_t biny, Double_t content)
-virtual void 	SetContent (const Double_t *content)
-virtual void 	SetContour (Int_t nlevels, const Double_t *levels=0)
-virtual void 	SetContourLevel (Int_t level, Double_t value)
-virtual void 	SetDirectory (TDirectory *dir)
-virtual void 	SetEntries (Double_t n)
-virtual void 	SetError (const Double_t *error)
-virtual void 	SetLabelColor (Color_t color=1, Option_t *axis="X")
-virtual void 	SetLabelFont (Style_t font=62, Option_t *axis="X")
-virtual void 	SetLabelOffset (Float_t offset=0.005, Option_t *axis="X")
-virtual void 	SetLabelSize (Float_t size=0.02, Option_t *axis="X")
-virtual void 	SetMaximum (Double_t maximum=-1111)
-virtual void 	SetMinimum (Double_t minimum=-1111)
-virtual void 	SetName (const char *name)
-virtual void 	SetNameTitle (const char *name, const char *title)
-virtual void 	SetNdivisions (Int_t n=510, Option_t *axis="X")
-virtual void 	SetNormFactor (Double_t factor=1)
-virtual void 	SetOption (Option_t *option=" ")
-virtual void 	SetStats (Bool_t stats=kTRUE)
-virtual void 	SetTickLength (Float_t length=0.02, Option_t *axis="X")
-virtual void 	SetTitle (const char *title)
-virtual void 	SetTitleFont (Style_t font=62, Option_t *axis="X")
-virtual void 	SetTitleOffset (Float_t offset=1, Option_t *axis="X")
-virtual void 	SetTitleSize (Float_t size=0.02, Option_t *axis="X")
-virtual void 	SetXTitle (const char *title)
-virtual void 	SetYTitle (const char *title)
-virtual void 	SetZTitle (const char *title)
-virtual TH1 * 	ShowBackground (Int_t niter=20, Option_t *option="same")
-virtual Int_t 	ShowPeaks (Double_t sigma=2, Option_t *option="", Double_t threshold=0.05)
-virtual void 	Smooth (Int_t ntimes=1, Option_t *option="")
-virtual void 	Sumw2 (Bool_t flag=kTRUE)
-void 	UseCurrentStyle ()*/
-    
-    
-    
-    virtual void Draw()=0;
-    virtual Bool_t 	Add(TF1 *h1,Double_t c1=1,Option_t* option=""){ return false; };
-    virtual Bool_t 	Add(const TH1 *h1, Double_t c1=1){ return false; };
-    virtual Bool_t 	Add(const TH1 *h, const TH1 *h2, Double_t c1=1, Double_t c2=1){ return false; };
-    virtual void 	AddBinContent(Int_t bin){};
-    virtual void 	AddBinContent(Int_t bin, Double_t w){};
-    virtual Double_t 	AndersonDarlingTest(const TH1 *h2, Option_t *option="") const { return -1; };
-    virtual Double_t 	AndersonDarlingTest(const TH1 *h2, Double_t &advalue) const{ return -1; };
-    virtual void SetPoint(int i,double x,double y){};
-    virtual void Fill(double x){};
-    virtual void Fill(double x,double w){};
-    virtual void Fill(double x,double y,double w){};
-    virtual void Fill(double x,double y,double z,double w){};
-    virtual void Fill(double x,double y,double z,double t,double w){};
+    virtual Int_t	Fill(Double_t x)
+    {
+        return -1;std::cout<<"Error"<<std::endl;
+    };
+    virtual Int_t	Fill(Double_t x, Double_t w){
+        return -1;std::cout<<"Error"<<std::endl;
+    };
+    virtual Int_t	Fill(const char* name, Double_t w){
+        return -1;std::cout<<"Error"<<std::endl;
+    };
+    virtual void	FillN(Int_t ntimes, const Double_t* x, const Double_t* w, Int_t stride = 1){
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual void	FillN(Int_t, const Double_t*, const Double_t*, const Double_t*, Int_t){
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual void	SetBins(Int_t nx, const Double_t* xBins){
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual  void	SetBins(Int_t nx, Double_t xmin, Double_t xmax){
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual  void	SetBins(Int_t nx, const Double_t* xBins, Int_t ny, const Double_t* yBins){
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual  void	SetBins(Int_t nx, Double_t xmin, Double_t xmax, Int_t ny, Double_t ymin, Double_t ymax){
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual  void	SetBins(Int_t nx, const Double_t* xBins, Int_t ny, const Double_t* yBins, Int_t nz, const Double_t* zBins){
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual  void	SetBins(Int_t nx, Double_t xmin, Double_t xmax, Int_t ny, Double_t ymin, Double_t ymax, Int_t nz, Double_t zmin, Double_t zmax){
+        std::cout<<"Error"<<std::endl;
+    };
+        ///////////////
+    virtual Bool_t	Add(const TH1* h1, Double_t c1 = 1)
+    {
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual Bool_t	Add(TF1* h1, Double_t c1 = 1, Option_t* option = ""){
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual Bool_t	Add(const TH1* h, const TH1* h2, Double_t c1 = 1, Double_t c2 = 1){
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual void	AddBinContent(Int_t bin){
+        
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual void	AddBinContent(Int_t bin, Double_t w){
+        
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual  void	AddDirectory(Bool_t add = kTRUE){
+      
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual  Bool_t	AddDirectoryStatus(){
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual Double_t	AndersonDarlingTest(const TH1* h2, Option_t* option = "") const{
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual Double_t	AndersonDarlingTest(const TH1* h2, Double_t& advalue) const{
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual void	Browse(TBrowser* b){
+       
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual Int_t	BufferEmpty(Int_t action = 0){
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual  Bool_t	CanExtendAllAxes() const{
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual  Double_t	Chi2Test(const TH1* h2, Option_t* option = "UU", Double_t* res = 0) const{
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual Double_t	Chi2TestX(const TH1* h2, Double_t& chi2, Int_t& ndf, Int_t& igood, Option_t* option = "UU", Double_t* res = 0) const{
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Double_t	Chisquare(TF1* f1, Option_t* option = "") const{
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual  TClass*	Class(){
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	ClearUnderflowAndOverflow(){
+       
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual TObject*	Clone(const char* newname = 0) const{
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Double_t	ComputeIntegral(Bool_t onlyPositive = false){
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	Copy(TObject& hnew) const{
+       
+        std::cout<<"Error"<<std::endl;
+    };;
+   virtual void	DirectoryAutoAdd(TDirectory*){
+        
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Int_t	DistancetoPrimitive(Int_t px, Int_t py){
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Bool_t	Divide(const TH1* h1){
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Bool_t	Divide(TF1* f1, Double_t c1 = 1){
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Bool_t	Divide(const TH1* h1, const TH1* h2, Double_t c1 = 1, Double_t c2 = 1, Option_t* option = ""){
+        return false;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	Draw(Option_t* option = ""){
+       
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual TH1*	DrawCopy(Option_t* option = "", const char* name_postfix = "_copy") const{
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual TH1*	DrawNormalized(Option_t* option = "", Double_t norm = 1) const{
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	DrawPanel(){
+        
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	Eval(TF1* f1, Option_t* option = ""){
+       
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	ExecuteEvent(Int_t event, Int_t px, Int_t py){
+       
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	ExtendAxis(Double_t x, TAxis* axis){
+       
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual TH1*	FFT(TH1* h_output, Option_t* option){
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	FillRandom(const char* fname, Int_t ntimes = 5000){
+      
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	FillRandom(TH1* h, Int_t ntimes = 5000){
+       
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Int_t	FindBin(Double_t x, Double_t y = 0, Double_t z = 0){
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Int_t	FindFirstBinAbove(Double_t threshold = 0, Int_t axis = 1) const{
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Int_t	FindFixBin(Double_t x, Double_t y = 0, Double_t z = 0) const{
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual Int_t	FindLastBinAbove(Double_t threshold = 0, Int_t axis = 1) const{
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual TObject*	FindObject(const char* name) const{
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual TObject*	FindObject(const TObject* obj) const{
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual TFitResultPtr	Fit(const char* formula, Option_t* option = "", Option_t* goption = "", Double_t xmin = 0, Double_t xmax = 0){return TFitResultPtr(nullptr);};
+   virtual TFitResultPtr	Fit(TF1* f1, Option_t* option = "", Option_t* goption = "", Double_t xmin = 0, Double_t xmax = 0){return TFitResultPtr(nullptr);};
+   virtual Int_t	FitOptionsMake(Option_t* option, Foption_t& Foption){
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual void	FitPanel(){
+        
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual TH1*	GetAsymmetry(TH1* h2, Double_t c2 = 1, Double_t dc2 = 0){
+        return nullptr;
+        std::cout<<"Error"<<std::endl;
+    };
+    virtual Color_t	GetAxisColor(Option_t* axis = "X") const{
+        return -1;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual  Float_t	GetBarOffset() const{
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual  Float_t	GetBarWidth() const{
+        return -1.0;
+        std::cout<<"Error"<<std::endl;
+    };
+   virtual  Int_t	GetBin(Int_t binx, Int_t biny = 0, Int_t binz = 0) const{return -1;};
+   virtual  Double_t	GetBinCenter(Int_t bin) const{return -1.0;};
+   virtual  Double_t	GetBinContent(Int_t bin) const{return -1.0;};
+  virtual   Double_t	GetBinContent(Int_t bin, Int_t) const{return -1.0;};
+  virtual   Double_t	GetBinContent(Int_t bin, Int_t, Int_t) const{return -1.0;};
+   virtual  Double_t	GetBinError(Int_t bin) const{return -1.0;};
+   virtual  Double_t	GetBinError(Int_t binx, Int_t biny) const{return -1.0;};
+   virtual  Double_t	GetBinError(Int_t binx, Int_t biny, Int_t binz) const{return -1.0;};
+   virtual  Double_t	GetBinErrorLow(Int_t bin) const{return -1.0;};
+   virtual  TH1::EBinErrorOpt	GetBinErrorOption() const{return TH1::EBinErrorOpt();};
+   virtual  Double_t	GetBinErrorUp(Int_t bin) const{return -1.0;};
+   virtual  Double_t	GetBinLowEdge(Int_t bin) const{return -1.0;};
+    virtual Double_t	GetBinWidth(Int_t bin) const{return -1.0;};
+   virtual  Double_t	GetBinWithContent(Double_t c, Int_t& binx, Int_t firstx = 0, Int_t lastx = 0, Double_t maxdiff = 0) const{return -1.0;};
+   virtual  void	GetBinXYZ(Int_t binglobal, Int_t& binx, Int_t& biny, Int_t& binz) const{};
+  virtual  const Double_t*	GetBuffer() const{return nullptr;};
+virtual Int_t	GetBufferLength() const{return -1;};
+virtual Int_t	GetBufferSize() const{return -1;};
+  virtual   Double_t	GetCellContent(Int_t binx, Int_t biny) const{return -1.0;};
+  virtual   Double_t	GetCellError(Int_t binx, Int_t biny) const{return -1.0;};
+  virtual   void	GetCenter(Double_t* center) const{};
+    virtual Int_t	GetContour(Double_t* levels = 0){return -1;};
+   virtual  Double_t	GetContourLevel(Int_t level) const{return -1.0;};
+   virtual  Double_t	GetContourLevelPad(Int_t level) const{return -1.0;};
+virtual TH1*	GetCumulative(Bool_t forward = kTRUE, const char* suffix = "_cumulative") const{return nullptr;};
+
+   virtual  Int_t	GetDimension() const{return -1;};
+virtual  TDirectory*	GetDirectory() const{return nullptr;};
+   virtual  Double_t	GetEffectiveEntries() const{return -1.0;};
+   virtual  Double_t	GetEntries() const{return -1.0;};
+  virtual   TF1*	GetFunction(const char* name) const{return nullptr;};
+   virtual  Double_t*	GetIntegral(){return nullptr;};
+  virtual   Double_t	GetKurtosis(Int_t axis = 1) const{return -1.0;};
+   virtual  Color_t	GetLabelColor(Option_t* axis = "X") const{return -1.0;};
+   virtual  Style_t	GetLabelFont(Option_t* axis = "X") const{return -1.0;};
+   virtual  Float_t	GetLabelOffset(Option_t* axis = "X") const{return -1.0;};
+   virtual  Float_t	GetLabelSize(Option_t* axis = "X") const{return -1.0;};
+ virtual  TList*	GetListOfFunctions() const{return nullptr;};
+   virtual  void	GetLowEdge(Double_t* edge) const{};
+  virtual   Double_t	GetMaximum(Double_t maxval = 3.40282347E+38F) const{return -1.0;};
+  virtual   Int_t	GetMaximumBin() const{return -1;};
+   virtual  Int_t	GetMaximumBin(Int_t& locmax, Int_t& locmay, Int_t& locmaz) const{return -1;};
+   virtual  Double_t	GetMaximumStored() const{return -1.0;};
+   virtual  Double_t	GetMean(Int_t axis = 1) const{return -1.0;};
+   virtual  Double_t	GetMeanError(Int_t axis = 1) const{return -1.0;};
+   virtual  Double_t	GetMinimum(Double_t minval = -3.40282347E+38F) const{return -1.0;};
+   virtual  Int_t	GetMinimumBin() const{return -1;};
+    virtual Int_t	GetMinimumBin(Int_t& locmix, Int_t& locmiy, Int_t& locmiz) const{return -1;};
+   virtual Double_t	GetMinimumStored() const{return -1.0;};
+   virtual Int_t	GetNbinsX() const{return -1;};
+   virtual  Int_t	GetNbinsY() const{return -1;};
+    virtual Int_t	GetNbinsZ() const{return -1;};
+   virtual  Int_t	GetNcells() const{return -1;};
+   virtual  Int_t	GetNdivisions(Option_t* axis = "X") const{return -1;};
+   virtual  Double_t	GetNormFactor() const{return -1.0;};
+   virtual  char*	GetObjectInfo(Int_t px, Int_t py) const{return nullptr;};
+   virtual  Option_t*	GetOption() const{return nullptr;};
+  virtual TVirtualHistPainter*	GetPainter(Option_t* option = ""){return nullptr;};
+  virtual   Int_t	GetQuantiles(Int_t nprobSum, Double_t* q, const Double_t* probSum = 0){return -1;};
+   virtual   Double_t	GetRandom() const{return -1.0;};
+   virtual Double_t	GetRMS(Int_t axis = 1) const{return -1.0;};
+ virtual Double_t	GetRMSError(Int_t axis = 1) const{return -1.0;};
+    virtual Double_t	GetSkewness(Int_t axis = 1) const{return -1.0;};
+   virtual  void	GetStats(Double_t* stats) const{};
+    virtual Double_t	GetStdDev(Int_t axis = 1) const{return -1.0;};
+   virtual Double_t	GetStdDevError(Int_t axis = 1) const{return -1.0;};
+   virtual  Double_t	GetSumOfWeights() const{return -1.0;};
+    virtual TArrayD*	GetSumw2(){return nullptr;};
+    virtual const TArrayD*	GetSumw2() const{return nullptr;};
+    virtual Int_t	GetSumw2N() const{return -1;};
+   virtual  Float_t	GetTickLength(Option_t* axis = "X") const{return -1.0;};
+    virtual Style_t	GetTitleFont(Option_t* axis = "X") const{return -1.0;};
+    virtual Float_t	GetTitleOffset(Option_t* axis = "X") const{return -1.0;};
+   virtual  Float_t	GetTitleSize(Option_t* axis = "X") const{return -1.0;};
+ virtual  TAxis*	GetXaxis(){return nullptr;};
+ virtual  const TAxis*	GetXaxis() const{return nullptr;};
+  virtual TAxis*	GetYaxis(){return nullptr;};
+ virtual const TAxis*	GetYaxis() const{return nullptr;};
+ virtual TAxis*	GetZaxis(){return nullptr;};
+virtual const TAxis*	GetZaxis() const{return nullptr;};
+   virtual  Double_t	Integral(Option_t* option = "") const{return -1.0;};
+   virtual  Double_t	Integral(Int_t binx1, Int_t binx2, Option_t* option = "") const{return -1.0;};
+  virtual   Double_t	IntegralAndError(Int_t binx1, Int_t binx2, Double_t& err, Option_t* option = "") const{return -1.0;};
+   virtual  Double_t	Interpolate(Double_t x){return -1.0;};
+   virtual  Double_t	Interpolate(Double_t x, Double_t y){return -1.0;};
+   virtual  Double_t	Interpolate(Double_t x, Double_t y, Double_t z){return -1.0;};
+   virtual  TClass*	IsA() const{return nullptr;};
+virtual Bool_t	IsBinOverflow(Int_t bin) const{return false;};
+virtual Bool_t	IsBinUnderflow(Int_t bin) const{return false;};
+  virtual   Double_t	KolmogorovTest(const TH1* h2, Option_t* option = "") const{return -1.0;};
+   virtual  void	LabelsDeflate(Option_t* axis = "X"){};
+    virtual void	LabelsInflate(Option_t* axis = "X"){};
+   virtual  void	LabelsOption(Option_t* option = "h", Option_t* axis = "X"){};
+   virtual  Long64_t	Merge(TCollection* list){return -1.0;};
+    virtual Bool_t	Multiply(const TH1* h1){return false;};
+   virtual  Bool_t	Multiply(TF1* h1, Double_t c1 = 1){return false;};
+   virtual  Bool_t	Multiply(const TH1* h1, const TH1* h2, Double_t c1 = 1, Double_t c2 = 1, Option_t* option = ""){return false;};
+   virtual  void	Paint(Option_t* option = ""){};
+   virtual  void	Print(Option_t* option = "") const{};
+   virtual  void	PutStats(Double_t* stats){};
+   virtual  TH1*	Rebin(Int_t ngroup = 2, const char* newname = "", const Double_t* xbins = 0){return nullptr;};
+   virtual  void	RebinAxis(Double_t x, TAxis* axis){};
+   virtual  TH1*	RebinX(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
+   virtual  void	Rebuild(Option_t* option = ""){};
+    virtual void	RecursiveRemove(TObject* obj){};
+    virtual void	Reset(Option_t* option = ""){};
+    virtual void	ResetStats(){};
+    virtual void	SavePrimitive(std::ostream& out, Option_t* option = ""){};
+    virtual void	Scale(Double_t c1 = 1, Option_t* option = ""){};
+    virtual void	SetAxisColor(Color_t color = 1, Option_t* axis = "X"){};
+    virtual void	SetAxisRange(Double_t xmin, Double_t xmax, Option_t* axis = "X"){};
+    virtual void	SetBarOffset(Float_t offset = 0.25){};
+    virtual void	SetBarWidth(Float_t width = 0.5){};
+    virtual void	SetBinContent(Int_t bin, Double_t content){};
+    virtual void	SetBinContent(Int_t bin, Int_t, Double_t content){};
+    virtual void	SetBinContent(Int_t bin, Int_t, Int_t, Double_t content){};
+    virtual void	SetBinError(Int_t bin, Double_t error){};
+    virtual void	SetBinError(Int_t binx, Int_t biny, Double_t error){};
+   virtual  void	SetBinError(Int_t binx, Int_t biny, Int_t binz, Double_t error){};
+    virtual void	SetBinErrorOption(TH1::EBinErrorOpt type){};
+
+    virtual void	SetBinsLength(Int_t = -1){};
+  virtual   void	SetBuffer(Int_t buffersize, Option_t* option = ""){};
+   virtual  UInt_t	SetCanExtend(UInt_t extendBitMask){return 0;};
+   virtual  void	SetCellContent(Int_t binx, Int_t biny, Double_t content){};
+  virtual   void	SetCellError(Int_t binx, Int_t biny, Double_t content){};
+  virtual   void	SetContent(const Double_t* content){};
+   virtual  void	SetContour(Int_t nlevels, const Double_t* levels = 0){};
+   virtual  void	SetContourLevel(Int_t level, Double_t value){};
+   virtual  void	SetDirectory(TDirectory* dir){};
+    virtual void	SetEntries(Double_t n){};
+   virtual  void	SetError(const Double_t* error){};
+   virtual  void	SetLabelColor(Color_t color = 1, Option_t* axis = "X"){};
+   virtual  void	SetLabelFont(Style_t font = 62, Option_t* axis = "X"){};
+   virtual  void	SetLabelOffset(Float_t offset = 0.0050000000000000001, Option_t* axis = "X"){};
+   virtual  void	SetLabelSize(Float_t size = 0.02, Option_t* axis = "X"){};
+   virtual  void	SetMaximum(Double_t maximum = -1111){};
+    virtual void	SetMinimum(Double_t minimum = -1111){};
+  virtual   void	SetName(const char* name){};
+   virtual  void	SetNameTitle(const char* name, const char* title){};
+    virtual void	SetNdivisions(Int_t n = 510, Option_t* axis = "X"){};
+  virtual   void	SetNormFactor(Double_t factor = 1){};
+  virtual   void	SetOption(Option_t* option = " "){};
+  virtual   void	SetStats(Bool_t stats = kTRUE){};
+   virtual  void	SetTickLength(Float_t length = 0.02, Option_t* axis = "X"){};
+   virtual  void	SetTitle(const char* title){};
+   virtual  void	SetTitleFont(Style_t font = 62, Option_t* axis = "X"){};
+   virtual  void	SetTitleOffset(Float_t offset = 1, Option_t* axis = "X"){};
+    virtual void	SetTitleSize(Float_t size = 0.02, Option_t* axis = "X"){};
+    virtual void	SetXTitle(const char* title){};
+    virtual void	SetYTitle(const char* title){};
+    virtual void	SetZTitle(const char* title){};
+    virtual TH1*	ShowBackground(Int_t niter = 20, Option_t* option = "same"){return nullptr;};
+    virtual void	ShowMembers(TMemberInspector& insp) const{};
+   virtual  Int_t	ShowPeaks(Double_t sigma = 2, Option_t* option = "", Double_t threshold = 0.050000000000000003){return -1;};
+   virtual   void	Smooth(Int_t ntimes = 1, Option_t* option = ""){};
+virtual void	SmoothArray(Int_t NN, Double_t* XX, Int_t ntimes = 1){};
+virtual  void	StatOverflows(Bool_t flag = kTRUE){};
+   virtual  void	Streamer(TBuffer&){};
+ virtual void	StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b){};
+ virtual    void	Sumw2(Bool_t flag = kTRUE){};
+ virtual TH1*	TransformHisto(TVirtualFFT* fft, TH1* h_output, Option_t* option){return nullptr;};
+  virtual   void	UseCurrentStyle(){};
+      virtual Int_t	GetDefaultBufferSize(){return -1;};
+virtual Bool_t	GetDefaultSumw2(){return false;};
+virtual void	SetDefaultBufferSize(Int_t buffersize = 1000){};
+virtual void	SetDefaultSumw2(Bool_t sumw2 = kTRUE){};
+
+
+///TH2
+
+
+
+    virtual Int_t	Fill(Double_t x, Double_t y, Double_t w){return -1;};
+    virtual Int_t	Fill(Double_t x, const char* namey, Double_t w){return -1;};
+    virtual Int_t	Fill(const char* namex, Double_t y, Double_t w){return -1;};
+    virtual void	FitSlicesX(TF1* f1 = 0, Int_t firstybin = 0, Int_t lastybin = -1, Int_t cut = 0, Option_t* option = "QNR", TObjArray* arr = 0){};
+    virtual void	FitSlicesY(TF1* f1 = 0, Int_t firstxbin = 0, Int_t lastxbin = -1, Int_t cut = 0, Option_t* option = "QNR", TObjArray* arr = 0){};
+    virtual Double_t	GetBinErrorLow(Int_t binx, Int_t biny){return -1.0;};
+    virtual Double_t	GetBinErrorUp(Int_t binx, Int_t biny){return -1.0;};
+    virtual Double_t	GetBinWithContent2(Double_t c, Int_t& binx, Int_t& biny, Int_t firstxbin = 1, Int_t lastxbin = -1, Int_t firstybin = 1, Int_t lastybin = -1, Double_t maxdiff = 0) const{return -1.0;};
+    virtual Double_t	GetCorrelationFactor(Int_t axis1 = 1, Int_t axis2 = 2) const{return -1.0;};
+    virtual Double_t	GetCovariance(Int_t axis1 = 1, Int_t axis2 = 2) const{return -1.0;};
+    virtual void	GetRandom2(Double_t& x, Double_t& y){};
+    virtual Double_t	Integral(Int_t binx1, Int_t binx2, Int_t biny1, Int_t biny2, Option_t* option = "") const{return -1.0;};
+    virtual Double_t	Integral(Int_t a, Int_t b, Int_t c, Int_t d, Int_t e, Int_t f, Option_t* option = "") const{return -1.0;};
+    virtual Double_t	IntegralAndError(Int_t binx1, Int_t binx2, Int_t biny1, Int_t biny2, Double_t& err, Option_t* option = "") const{return -1.0;};
+    TProfile*	ProfileX(const char* name = "_pfx", Int_t firstybin = 1, Int_t lastybin = -1, Option_t* option = "") const{return nullptr;};
+    TProfile*	ProfileY(const char* name = "_pfy", Int_t firstxbin = 1, Int_t lastxbin = -1, Option_t* option = "") const{return nullptr;};
+    TH1D*	ProjectionX(const char* name = "_px", Int_t firstybin = 0, Int_t lastybin = -1, Option_t* option = "") const{return nullptr;};
+    TH1D*	ProjectionY(const char* name = "_py", Int_t firstxbin = 0, Int_t lastxbin = -1, Option_t* option = "") const{return nullptr;};
+    TH1D*	QuantilesX(Double_t prob = 0.5, const char* name = "_qx") const{return nullptr;};
+    TH1D*	QuantilesY(Double_t prob = 0.5, const char* name = "_qy") const{return nullptr;};
+    virtual TH2*	Rebin2D(Int_t nxgroup = 2, Int_t nygroup = 2, const char* newname = ""){return nullptr;};
+    virtual TH2*	RebinY(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
+    virtual void	SetShowProjectionX(Int_t nbins = 1){};
+    virtual void	SetShowProjectionY(Int_t nbins = 1){};
+
+
+///TH3
+virtual Int_t	Fill(Double_t x, Double_t y, Double_t z, Double_t w){return -1;};
+virtual Int_t	Fill(const char* namex, const char* namey, const char* namez, Double_t w){return -1;};
+virtual Int_t	Fill(const char* namex, Double_t y, const char* namez, Double_t w){return -1;};
+virtual Int_t	Fill(const char* namex, const char* namey, Double_t z, Double_t w){return -1;};
+virtual Int_t	Fill(Double_t x, const char* namey, const char* namez, Double_t w){return -1;};
+virtual Int_t	Fill(Double_t x, const char* namey, Double_t z, Double_t w){return -1;};
+virtual Int_t	Fill(Double_t x, Double_t y, const char* namez, Double_t w){return -1;};
+virtual void	FitSlicesZ(TF1* f1 = 0, Int_t binminx = 1, Int_t binmaxx = 0, Int_t binminy = 1, Int_t binmaxy = 0, Int_t cut = 0, Option_t* option = "QNR"){};
+virtual Double_t	GetBinErrorLow(Int_t binx, Int_t biny, Int_t binz){return -1.0;};
+virtual Double_t	GetBinErrorUp(Int_t binx, Int_t biny, Int_t binz){return -1.0;};
+virtual Double_t	GetBinWithContent3(Double_t c, Int_t& binx, Int_t& biny, Int_t& binz, Int_t firstx = 0, Int_t lastx = 0, Int_t firsty = 0, Int_t lasty = 0, Int_t firstz = 0, Int_t lastz = 0, Double_t maxdiff = 0) const{return -1.0;};
+virtual void	GetRandom3(Double_t& x, Double_t& y, Double_t& z){};
+TH1*	Project3D(Option_t* option = "x") const{return nullptr;};
+virtual TProfile2D*	Project3DProfile(Option_t* option = "xy") const{return nullptr;};
+TH1D*	ProjectionX(const char* name = "_px", Int_t iymin = 0, Int_t iymax = -1, Int_t izmin = 0, Int_t izmax = -1, Option_t* option = "") const{return nullptr;};
+TH1D*	ProjectionY(const char* name = "_py", Int_t ixmin = 0, Int_t ixmax = -1, Int_t izmin = 0, Int_t izmax = -1, Option_t* option = "") const{return nullptr;};
+TH1D*	ProjectionZ(const char* name = "_pz", Int_t ixmin = 0, Int_t ixmax = -1, Int_t iymin = 0, Int_t iymax = -1, Option_t* option = "") const{return nullptr;};
+virtual TH3*	Rebin3D(Int_t nxgroup = 2, Int_t nygroup = 2, Int_t nzgroup = 2, const char* newname = ""){return nullptr;};
+virtual TH3*	RebinZ(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
+virtual void	SetShowProjection(const char* option = "xy", Int_t nbins = 1){};
+
+
+
+
+
+
+
+
+
+
+
+
     virtual ~HistoGraphBase();
 };
 #endif
