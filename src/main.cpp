@@ -4,6 +4,7 @@
 #include "TObjectTable.h"
 #include "Handler.h"
 #include "TF2.h"
+#include "TF3.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -16,9 +17,9 @@ int main(int argc, char *argv[])
   k.ListHierarchy();*/
   TFile a("r.root","CREATE");
   std::map<int,HistoGraphBase*> n;
-  n[1]= new THistoGraph<TH1C>("TH1C","TH1C",100,0,100);
+  n[1]= new THistoGraph<TH3C>("kfkfkfkfk","Toto",100,0,100,100,0,100,100,0,100);
   n[2]= new THistoGraph<TH2C>("TH2S","TH2S",100,0,100,100,0,100);
-  n[3]= new THistoGraph<TH1I>("Titi","Toto",100,0,100);
+  n[3]= new THistoGraph<TH1F>("TH1C","TH1C",100,0,100);
   //n[3]->Warning("rrrr","kkkk","lllll");
   n[3]->Fill(1.0);
   TF1 *mygaus = new TF1("mygaus","TMath::Gaus(x,3,.5)",0,6);
@@ -33,6 +34,12 @@ int main(int argc, char *argv[])
   n[2]->SetLineColor(kRed);
   n[2]->SetFillColor(kRed);
   n[2]->SetMarkerStyle(kCircle);
+  TF3 *mygaus3 = new TF3("mygaus3","TMath::Gaus(x,50,25)*TMath::Gaus(y,50,25)*TMath::Gaus(z,50,25)",0,100,0,100,0,100);
+    n[1]->FillRandom("mygaus3",10000);
+  n[1]->GetBinError(0);
+  n[1]->SetLineColor(kRed);
+  n[1]->SetFillColor(kRed);
+  n[1]->SetMarkerStyle(kCircle);
   //std::cout<<n[3]->GetTitle()<<" "<<n[3]->GetName();
   /*n[4]= new THistoGraph<TH1F>("TH1F","TH1F",100,0,100);
   n[5]= new THistoGraph<TH1D>("TH1D","TH1D",100,0,100);

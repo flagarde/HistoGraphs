@@ -41,7 +41,6 @@ class THistoGraph< T, typename std::enable_if<is_TH1<T>::value,T>::type>:public 
       this->Detach();
       this->SetObjectStat(false);
     }
-
    virtual Int_t	Fill(Double_t x)
    {
        return this->p_histograph->Fill(x);
@@ -135,18 +134,13 @@ class THistoGraph<T, typename std::enable_if<is_TH2<T>::value,T>::type>:public T
       this->Detach();
       this->SetObjectStat(false);
     }
-    virtual Int_t	BufferEmpty(Int_t action = 0)
-    {
-        return this->p_histograph->BufferEmpty(action);
-    }
     virtual TClass*	Class()
     {
         return TH2::Class();
     }
-    virtual void	Copy(TObject& hnew) const
-    {
-        this->p_histograph->Copy(hnew);
-    }
+    
+
+    
     virtual Int_t	Fill(Double_t x, Double_t y)
     {
         return this->p_histograph->Fill(x,y);
@@ -175,22 +169,6 @@ class THistoGraph<T, typename std::enable_if<is_TH2<T>::value,T>::type>:public T
     {
         this->p_histograph->FillN(ntimes,x,y,w,stride);
     }
-    virtual void	FillRandom(const char* fname, Int_t ntimes = 5000)
-    {
-        this->p_histograph->FillRandom(fname,ntimes);
-    }
-    virtual void	FillRandom(TH1* h, Int_t ntimes = 5000)
-    {
-        this->p_histograph->FillRandom(h,ntimes);
-    }
-    virtual Int_t	FindFirstBinAbove(Double_t threshold = 0, Int_t axis = 1) const
-    {
-        return this->p_histograph->FindFirstBinAbove(threshold,axis);
-    }
-    virtual Int_t	FindLastBinAbove(Double_t threshold = 0, Int_t axis = 1) const
-    {
-        return this->p_histograph->FindLastBinAbove(threshold,axis);
-    }
     virtual void	FitSlicesX(TF1* f1 = 0, Int_t firstybin = 0, Int_t lastybin = -1, Int_t cut = 0, Option_t* option = "QNR", TObjArray* arr = 0)
     {
         this->p_histograph->FitSlicesX(f1,firstybin,lastybin,cut,option,arr);
@@ -198,30 +176,6 @@ class THistoGraph<T, typename std::enable_if<is_TH2<T>::value,T>::type>:public T
     virtual void	FitSlicesY(TF1* f1 = 0, Int_t firstxbin = 0, Int_t lastxbin = -1, Int_t cut = 0, Option_t* option = "QNR", TObjArray* arr = 0)
     {
         this->p_histograph->FitSlicesY(f1,firstxbin,lastxbin,cut,option,arr);
-    }
-    virtual Int_t	GetBin(Int_t binx, Int_t biny, Int_t binz = 0) const
-    {
-        return this->p_histograph->GetBin(binx,biny,binz);
-    }
-    virtual Double_t	GetBinContent(Int_t bin) const
-    {
-        return this->p_histograph->GetBinContent(bin);
-    }
-    virtual Double_t	GetBinContent(Int_t binx, Int_t biny) const
-    {
-        return this->p_histograph->GetBinContent(binx,biny);
-    }
-    virtual Double_t	GetBinContent(Int_t binx, Int_t biny, Int_t a) const
-    {
-        return this->p_histograph->GetBinContent(binx,biny,a);
-    }
-    virtual Double_t	GetBinErrorLow(Int_t binx, Int_t biny)
-    {
-        return this->p_histograph->GetBinErrorLow(binx,biny);
-    }
-    virtual Double_t	GetBinErrorUp(Int_t binx, Int_t biny)
-    {
-       return this->p_histograph->GetBinErrorUp(binx,biny); 
     }
     virtual Double_t	GetBinWithContent2(Double_t c, Int_t& binx, Int_t& biny, Int_t firstxbin = 1, Int_t lastxbin = -1, Int_t firstybin = 1, Int_t lastybin = -1, Double_t maxdiff = 0) const
     {
@@ -242,46 +196,6 @@ class THistoGraph<T, typename std::enable_if<is_TH2<T>::value,T>::type>:public T
     virtual void	GetStats(Double_t* stats) const
     {
         this->p_histograph->GetStats(stats);
-    }
-    virtual Double_t	Integral(Option_t* option = "") const
-    {
-        return this->p_histograph->Integral(option);
-    }
-    virtual Double_t	Integral(Int_t binx1, Int_t binx2, Int_t biny1, Int_t biny2, Option_t* option = "") const
-    {
-        return this->p_histograph->Integral(binx1,binx2,biny1,biny2,option);
-    }
-    virtual Double_t	Integral(Int_t a, Int_t b, Int_t c, Int_t d, Int_t e, Int_t f, Option_t* option = "") const
-    {
-        return this->p_histograph->Integral(a,b,c,d,e,f,option);
-    }
-    virtual Double_t	IntegralAndError(Int_t binx1, Int_t binx2, Int_t biny1, Int_t biny2, Double_t& err, Option_t* option = "") const
-    {
-        return this->p_histograph->IntegralAndError(binx1,binx2,biny1,biny2,err,option);
-    }
-    virtual Double_t	Interpolate(Double_t x)
-    {
-        return this->p_histograph->Interpolate(x);
-    }
-    virtual Double_t	Interpolate(Double_t x, Double_t y)
-    {
-        return this->p_histograph->Interpolate(x,y);
-    }
-    virtual Double_t	Interpolate(Double_t x, Double_t y, Double_t z)
-    {
-        return this->p_histograph->Interpolate(x,y,z);
-    }
-    virtual TClass*	IsA() const
-    {
-        return this->p_histograph->IsA();
-    }
-    virtual Double_t	KolmogorovTest(const TH1* h2, Option_t* option = "") const
-    {
-        return this->p_histograph->KolmogorovTest(h2,option);
-    }
-    virtual Long64_t	Merge(TCollection* list)
-    {
-        return this->p_histograph->Merge(list);
     }
     TProfile*	ProfileX(const char* name = "_pfx", Int_t firstybin = 1, Int_t lastybin = -1, Option_t* option = "") const
     {
@@ -311,22 +225,14 @@ class THistoGraph<T, typename std::enable_if<is_TH2<T>::value,T>::type>:public T
     {
         return this->p_histograph->QuantilesY(prob,name);
     }
-    virtual TH2*	Rebin2D(Int_t nxgroup = 2, Int_t nygroup = 2, const char* newname = "")
+   /* virtual TH2*	Rebin2D(Int_t nxgroup = 2, Int_t nygroup = 2, const char* newname = "")
     {
         return this->p_histograph->Rebin2D(nxgroup,nygroup,newname);
-    }
-    virtual TH2*	RebinX(Int_t ngroup = 2, const char* newname = "")
-    {
-        return this->p_histograph->RebinX(ngroup,newname);
-    }
-    virtual TH2*	RebinY(Int_t ngroup = 2, const char* newname = "")
+    }*/
+   /* virtual TH2*	RebinY(Int_t ngroup = 2, const char* newname = "")
     {
         return this->p_histograph->RebinY(ngroup,newname);
-    }
-    virtual void	Reset(Option_t* option = "")
-    {
-        this->p_histograph->Reset(option);
-    }
+    }*/
     virtual void	SetBinContent(Int_t bin, Double_t content)
     {
         this->p_histograph->SetBinContent(bin,content);
@@ -346,30 +252,6 @@ class THistoGraph<T, typename std::enable_if<is_TH2<T>::value,T>::type>:public T
     virtual void	SetShowProjectionY(Int_t nbins = 1)
     {
         this->p_histograph->SetShowProjectionY(nbins);
-    }
-    virtual TH1*	ShowBackground(Int_t niter = 20, Option_t* option = "same")
-    {
-        return this->p_histograph->ShowBackground(niter,option);
-    }
-    virtual void	ShowMembers(TMemberInspector& insp) const
-    {
-        this->p_histograph->ShowMembers(insp);
-    }
-    virtual Int_t	ShowPeaks(Double_t sigma = 2, Option_t* option = "", Double_t threshold = 0.050000000000000003)
-    {
-        return this->p_histograph->ShowPeaks(sigma,option,threshold);
-    }
-    virtual void	Smooth(Int_t ntimes = 1, Option_t* option = "")
-    {
-        this->p_histograph->Smooth(ntimes,option);
-    }
-    virtual void	Streamer(TBuffer& buf)
-    {
-        this->p_histograph->Streamer(buf);
-    }
-    void	StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b)
-    {
-        this->p_histograph->StreamerNVirtual(ClassDef_StreamerNVirtual_b);
     }
     virtual void	SetBins(Int_t nx, const Double_t* xBins)
    {
@@ -460,17 +342,9 @@ class THistoGraph<T, typename std::enable_if<is_TH3<T>::value,T>::type>:public T
    {
        this->p_histograph->SetBins(nx,xmin,xmax,ny,ymin,ymax,nz,zmin,zmax);
    }
-   virtual Int_t	BufferEmpty(Int_t action = 0)
-   {
-       return this->p_histograph->BufferEmpty(action);
-   }
 virtual TClass*	Class()
 {
     return TH3::Class();
-}
-virtual void	Copy(TObject& hnew) const
-{
-    this->p_histograph->Copy(hnew);
 }
 virtual Int_t	Fill(Double_t x, Double_t y, Double_t z)
 {
@@ -504,22 +378,9 @@ virtual Int_t	Fill(Double_t x, Double_t y, const char* namez, Double_t w)
 {
     return this->p_histograph->Fill(x,y,namez,w);
 }
-virtual void	FillRandom(const char* fname, Int_t ntimes = 5000)
-{
-    this->p_histograph->FillRandom(fname,ntimes);
-}
-virtual void	FillRandom(TH1* h, Int_t ntimes = 5000)
-{
-    this->p_histograph->FillRandom(h,ntimes);
-}
-virtual Int_t	FindFirstBinAbove(Double_t threshold = 0, Int_t axis = 1) const
-{
-    return this->p_histograph->FindFirstBinAbove(threshold,axis);
-}
-virtual Int_t	FindLastBinAbove(Double_t threshold = 0, Int_t axis = 1) const
-{
-   return  this->p_histograph->FindLastBinAbove(threshold,axis);
-}
+
+
+
 virtual void	FitSlicesZ(TF1* f1 = 0, Int_t binminx = 1, Int_t binmaxx = 0, Int_t binminy = 1, Int_t binmaxy = 0, Int_t cut = 0, Option_t* option = "QNR")
 {
     this->p_histograph->FitSlicesZ(f1,binminx,binmaxx,binminy,binmaxy,cut,option);
@@ -527,26 +388,6 @@ virtual void	FitSlicesZ(TF1* f1 = 0, Int_t binminx = 1, Int_t binmaxx = 0, Int_t
 virtual Int_t	GetBin(Int_t binx, Int_t biny, Int_t binz) const
 {
    return  this->p_histograph->GetBin(binx,biny,binz);
-}
-virtual Double_t	GetBinContent(Int_t bin) const
-{
-   return  this->p_histograph->GetBinContent(bin);
-}
-virtual Double_t	GetBinContent(Int_t bin, Int_t a) const
-{
-    return this->p_histograph->GetBinContent(bin,a);
-}
-virtual Double_t	GetBinContent(Int_t binx, Int_t biny, Int_t binz) const
-{
-    return this->p_histograph->GetBinContent(binx,biny,binz);
-}
-virtual Double_t	GetBinErrorLow(Int_t binx, Int_t biny, Int_t binz)
-{
-    return this->p_histograph->GetBinErrorLow(binx,biny,binz);
-}
-virtual Double_t	GetBinErrorUp(Int_t binx, Int_t biny, Int_t binz)
-{
-    return this->p_histograph->GetBinErrorUp(binx,biny,binz);
 }
 virtual Double_t	GetBinWithContent3(Double_t c, Int_t& binx, Int_t& biny, Int_t& binz, Int_t firstx = 0, Int_t lastx = 0, Int_t firsty = 0, Int_t lasty = 0, Int_t firstz = 0, Int_t lastz = 0, Double_t maxdiff = 0) const
 {
@@ -563,46 +404,6 @@ virtual Double_t	GetCovariance(Int_t axis1 = 1, Int_t axis2 = 2) const
 virtual void	GetRandom3(Double_t& x, Double_t& y, Double_t& z)
 {
     this->p_histograph->GetRandom3(x,y,z);
-}
-virtual void	GetStats(Double_t* stats) const
-{
-    this->p_histograph->GetStats(stats);
-}
-virtual Double_t	Integral(Option_t* option = "") const
-{
-    return this->p_histograph->Integral(option);
-}
-virtual Double_t	Integral(Int_t binx1, Int_t binx2, Int_t biny1, Int_t biny2, Int_t binz1, Int_t binz2, Option_t* option = "") const
-{
-    return this->p_histograph->Integral(binx1,binx2,biny1,biny2,binz1,binz2,option);
-}
-virtual Double_t	IntegralAndError(Int_t binx1, Int_t binx2, Int_t biny1, Int_t biny2, Int_t binz1, Int_t binz2, Double_t& err, Option_t* option = "") const
-{
-    return this->p_histograph->IntegralAndError(binx1,binx2,biny1,biny2,binz1,binz2,err,option);
-}
-virtual Double_t	Interpolate(Double_t x)
-{
-    return this->p_histograph->Interpolate(x);
-}
-virtual Double_t	Interpolate(Double_t x, Double_t y)
-{
-    return this->p_histograph->Interpolate(x,y);
-}
-virtual Double_t	Interpolate(Double_t x, Double_t y, Double_t z)
-{
-    return this->p_histograph->Interpolate(x,y,z);
-}
-virtual TClass*	IsA() const
-{
-    return this->p_histograph->IsA();
-}
-virtual Double_t	KolmogorovTest(const TH1* h2, Option_t* option = "") const
-{
-    return this->p_histograph->KolmogorovTest(h2,option);
-}
-virtual Long64_t	Merge(TCollection* list)
-{
-    return this->p_histograph->Merge(list);
 }
 TH1*	Project3D(Option_t* option = "x") const
 {
@@ -624,58 +425,19 @@ TH1D*	ProjectionZ(const char* name = "_pz", Int_t ixmin = 0, Int_t ixmax = -1, I
 {
     return this->p_histograph->ProjectionZ(name,ixmin,ixmax,iymin,iymax,option);
 }
-virtual void	PutStats(Double_t* stats)
-{
-    this->p_histograph->PutStats(stats);
-}
 virtual TH3*	Rebin3D(Int_t nxgroup = 2, Int_t nygroup = 2, Int_t nzgroup = 2, const char* newname = "")
 {
     return this->p_histograph->Rebin3D(nxgroup,nygroup,nzgroup,newname);
 }
-virtual TH3*	RebinX(Int_t ngroup = 2, const char* newname = "")
-{
-    return this->p_histograph->RebinX(ngroup,newname);
-}
-virtual TH3*	RebinY(Int_t ngroup = 2, const char* newname = "")
+/*virtual TH3*	RebinY(Int_t ngroup = 2, const char* newname = "")
 {
     return this->p_histograph->RebinY(ngroup,newname);
-}
-virtual TH3*	RebinZ(Int_t ngroup = 2, const char* newname = "")
-{
-    return this->p_histograph->RebinZ(ngroup,newname);
-}
-virtual void	Reset(Option_t* option = "")
-{
-    this->p_histograph->Reset(option);
-}
-virtual void	SetBinContent(Int_t bin, Double_t content)
-{
-    this->p_histograph->SetBinContent(bin,content);
-}
-virtual void	SetBinContent(Int_t bin, Int_t a, Double_t content)
-{
-    this->p_histograph->SetBinContent(bin,a,content);
-}
-virtual void	SetBinContent(Int_t binx, Int_t biny, Int_t binz, Double_t content)
-{
-    this->p_histograph->SetBinContent(binx,biny,binz,content);
-}
+}*/
 virtual void	SetShowProjection(const char* option = "xy", Int_t nbins = 1)
 {
     this->p_histograph->SetShowProjection(option,nbins);
 }
-virtual void	ShowMembers(TMemberInspector& insp) const
-{
-    this->p_histograph->ShowMembers(insp);
-}
-virtual void	Streamer(TBuffer& buf)
-{
-    this->p_histograph->Streamer(buf);
-}
-void	StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b)
-{
-    this->p_histograph->StreamerNVirtual(ClassDef_StreamerNVirtual_b);
-}
+
    
    
 };
@@ -691,21 +453,289 @@ template< typename T>
 class THistoGraph< T, typename std::enable_if<is_TProfile<T>::value,T>::type>:public THistoCommon<T>
 {
   public:
-    THistoGraph(){};
-    THistoGraph(const char* name,const char* title,int bin ,  Double_t x,  Double_t   y)
-    {
-      this->p_histograph=new T(name,title,bin,x,y);
+    THistoGraph()
+      {
+      this->p_histograph=new T();
       this->Detach();
       this->SetObjectStat(false);
     }
-    void Fill( Double_t  x,  Double_t  y)
-    {
-      this->p_histograph->Fill(x,y);
+ 
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, Double_t xlow, Double_t xup, Option_t *option="")
+      {
+      this->p_histograph=new T(name,title,nbinsx,xlow,xup,option);
+      this->Detach();
+      this->SetObjectStat(false);
     }
-    void Fill( Double_t  x,Double_t  y,Double_t  w)
-    {
-      this->p_histograph->Fill(x,y,w);
+ 
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, Double_t xlow, Double_t xup, Double_t ylow, Double_t yup, Option_t *option="")
+      {
+      this->p_histograph=new T(name,title,nbinsx,xlow,xup,ylow,yup,option);
+      this->Detach();
+      this->SetObjectStat(false);
     }
+ 
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, const Float_t *xbins, Option_t *option="")
+      {
+      this->p_histograph=new T(name,title,nbinsx,xbins,option);
+      this->Detach();
+      this->SetObjectStat(false);
+    }
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, const Double_t *xbins, Option_t *option="")
+      {
+      this->p_histograph=new T(name,title,nbinsx,xbins,option);
+      this->Detach();
+      this->SetObjectStat(false);
+    }
+ 
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, const Double_t *xbins, Double_t ylow, Double_t yup, Option_t *option="")
+      {
+      this->p_histograph=new T(name,title,nbinsx,xbins,ylow,yup,option);
+      this->Detach();
+      this->SetObjectStat(false);
+    }
+ 
+virtual Bool_t 	Add (TF1 *h1, Double_t c1=1, Option_t *option="")
+{
+  return this->p_histograph->Add(h1,c1,option);
+}
+
+ 
+virtual Bool_t 	Add (const TH1 *h1, Double_t c1=1)
+{
+  return   this->p_histograph->Add(h1,c1);
+}
+ 
+virtual Bool_t 	Add (const TH1 *h1, const TH1 *h2, Double_t c1=1, Double_t c2=1)
+{
+   return  this->p_histograph->Add(h1,h2,c1,c2);
+}
+ 
+virtual Int_t 	BufferEmpty (Int_t action=0)
+{
+  return   this->p_histograph->BufferEmpty(action);
+}
+ 
+void 	BuildOptions (Double_t ymin, Double_t ymax, Option_t *option)
+{
+    this->p_histograph->BuildOptions(ymin,ymax,option);
+}
+ 
+virtual void 	Copy (TObject &hnew) const
+{
+    this->p_histograph->Copy(hnew);
+}
+ 
+virtual Bool_t 	Divide (TF1 *h1, Double_t c1=1)
+{
+    return this->p_histograph->Divide(h1,c1);
+}
+ 
+virtual Bool_t 	Divide (const TH1 *h1)
+{
+  return   this->p_histograph->Divide(h1);
+}
+ 
+virtual Bool_t 	Divide (const TH1 *h1, const TH1 *h2, Double_t c1=1, Double_t c2=1, Option_t *option="")
+{
+   return  this->p_histograph->Divide(h1,h2,c1,c2);
+} 	
+ 
+virtual void 	ExtendAxis (Double_t x, TAxis *axis)
+{
+    this->p_histograph->ExtendAxis(x,axis);
+}
+ 
+virtual Int_t 	Fill (Double_t x, Double_t y)
+{
+   return  this->p_histograph->Fill(x,y);
+}
+ 
+virtual Int_t 	Fill (const char *namex, Double_t y)
+{
+   return  this->p_histograph->Fil(namex,y);
+}
+ 
+virtual Int_t 	Fill (Double_t x, Double_t y, Double_t w)
+{
+   return  this->p_histograph->Fill(x,y,w);
+}
+virtual Int_t 	Fill (const char *namex, Double_t y, Double_t w)
+{
+   return  this->p_histograph->Fill(namex,y,w);
+}
+ 
+virtual void 	FillN (Int_t ntimes, const Double_t *x, const Double_t *y, const Double_t *w, Int_t stride=1)
+{
+    this->p_histograph->FillN(ntimes,x,y,w,stride);
+}
+ 
+virtual Double_t 	GetBinContent (Int_t bin) const
+{
+  return   this->p_histograph->GetBinContent(bin);
+}
+ 
+virtual Double_t 	GetBinContent (Int_t bin, Int_t a) const
+{
+  return   this->p_histograph->GetBinContent(bin,a);
+} 
+virtual Double_t 	GetBinContent (Int_t bin, Int_t a, Int_t b) const
+{
+  return   this->p_histograph->GetBinContent(bin,a,b);
+}
+virtual Double_t 	GetBinEffectiveEntries (Int_t bin) const
+{
+  return   this->p_histograph->GetBinEffectiveEntries(bin);
+}
+ 
+virtual Double_t 	GetBinEntries (Int_t bin) const
+{
+   return  this->p_histograph->GetBinEntries(bin);
+}
+ 
+virtual Double_t 	GetBinError (Int_t bin) const
+{
+   return  this->p_histograph->GetBinError(bin);
+}
+ 
+virtual Double_t 	GetBinError (Int_t bin, Int_t a) const
+{
+   return  this->p_histograph->GetBinError(bin,a);
+}
+virtual Double_t 	GetBinError (Int_t bin, Int_t a, Int_t b) const
+ {
+   return  this->p_histograph->GetBinError(bin,a,b);
+}
+virtual TArrayD * 	GetBinSumw2 ()
+ {
+  return   this->p_histograph->GetBinSumw2();
+}
+virtual const TArrayD * 	GetBinSumw2 () const
+ {
+   return  this->p_histograph->GetBinSumw2();
+}
+Option_t * 	GetErrorOption () const
+{
+  return   this->p_histograph->GetErrorOption();
+}
+ 
+virtual void 	GetStats (Double_t *stats) const
+{
+    this->p_histograph->GetStats(stats);
+}
+ 
+virtual Double_t 	GetYmax () const
+ {
+  return   this->p_histograph->GetYmax();
+}
+virtual Double_t 	GetYmin () const
+ {
+   return  this->p_histograph->GetYmin();
+}
+virtual void 	LabelsDeflate (Option_t *axis="X")
+{
+    this->p_histograph->LabelsDeflate(axis);
+}
+ 
+virtual void 	LabelsInflate (Option_t *axis="X")
+{
+    this->p_histograph->LabelsInflate(axis);
+}
+ 
+virtual void 	LabelsOption (Option_t *option="h", Option_t *axis="X")
+{
+    this->p_histograph->LabelsOption(option,axis);
+}
+ 
+virtual Long64_t 	Merge (TCollection *list)
+{
+   return  this->p_histograph->Merge(list);
+}
+ 
+virtual Bool_t 	Multiply (TF1 *h1, Double_t c1=1)
+{
+   return  this->p_histograph->Multiply(h1,c1);
+}
+ 
+virtual Bool_t 	Multiply (const TH1 *h1)
+{
+   return  this->p_histograph->Multiply(h1);
+}
+ 
+virtual Bool_t 	Multiply (const TH1 *h1, const TH1 *h2, Double_t c1=1, Double_t c2=1, Option_t *option="")
+{
+   return  this->p_histograph->Multiply(h1,h2,c1,c2);
+}
+ 
+TH1D * 	ProjectionX (const char *name="_px", Option_t *option="e") const
+{
+   return  this->p_histograph->ProjectionX(name,option);
+}
+ 
+virtual void 	PutStats (Double_t *stats)
+{
+    this->p_histograph->PutStats(stats);
+}
+ 
+TH1 * 	Rebin (Int_t ngroup=2, const char *newname="", const Double_t *xbins=0)
+{
+    return this->p_histograph->Rebin(ngroup,newname,xbins);
+}
+ 
+virtual void 	Reset (Option_t *option="")
+{
+    this->p_histograph->Reset(option);
+}
+ 
+virtual void 	SavePrimitive (std::ostream &out, Option_t *option="")
+{
+    this->p_histograph->SavePrimitive(out,option);
+}
+ 
+virtual void 	Scale (Double_t c1=1, Option_t *option="")
+{
+    this->p_histograph->Scale(c1,option);
+}
+ 
+virtual void 	SetBinEntries (Int_t bin, Double_t w)
+{
+    this->p_histograph->SetBinEntries(bin,w);
+}
+ 
+virtual void 	SetBins (Int_t nbins, Double_t xmin, Double_t xmax)
+{
+    this->p_histograph->SetBins(nbins,xmin,xmax);
+}
+ 
+virtual void 	SetBins (Int_t nx, const Double_t *xbins)
+{
+    this->p_histograph->SetBins(nx,xbins);
+}
+ 
+virtual void 	SetBinsLength (Int_t n=-1)
+{
+    this->p_histograph->SetBinsLength(n);
+}
+ 
+virtual void 	SetBuffer (Int_t buffersize, Option_t *option="")
+{
+    this->p_histograph->SetBuffer(buffersize,option);
+}
+ 
+virtual void 	SetErrorOption (Option_t *option="")
+{
+    this->p_histograph->SetErrorOption(option);
+}
+ 
+virtual void 	Sumw2 (Bool_t flag=kTRUE)
+{
+    this->p_histograph->Sumw2(flag);
+}
+
+virtual void 	Approximate (Bool_t approx=kTRUE)
+{
+    
+    this->p_histograph->Approximate(approx);
+}
 };
 
 template <typename T>
@@ -719,48 +749,283 @@ template< typename T>
 class THistoGraph< T, typename std::enable_if<is_TProfile2D<T>::value,T>::type>:public THistoCommon<T>
 {
   public:
-    THistoGraph(){};
-    THistoGraph(const char* name,const char* title,int bin , Double_t  xmin, Double_t  xmax,int biny,  Double_t  ymin,  Double_t  ymax)
-    {
-      this->p_histograph=new T(name,title,bin,xmin,xmax,biny,ymin,ymax);
+    THistoGraph ()
+      {
+      this->p_histograph=new T();
       this->Detach();
       this->SetObjectStat(false);
     }
-    void Fill( Double_t  x,  Double_t  y, Double_t  z)
-    {
-      this->p_histograph->Fill(x,y,z);
+ 
+ 	THistoGraph (const char *name, const char *title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, Double_t ylow, Double_t yup, Double_t zlow, Double_t zup, Option_t *option="")
+  {
+      this->p_histograph=new T(name,title,nbinsx,xlow,xup,nbinsy,ylow,yup,zlow,zup,option);
+      this->Detach();
+      this->SetObjectStat(false);
     }
-    void Fill( Double_t  x,Double_t  y,Double_t  z,Double_t  w)
-    {
-      this->p_histograph->Fill(x,y,z,w);
+ 
+ 	THistoGraph (const char *name, const char *title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, Double_t ylow, Double_t yup, Option_t *option="")
+  {
+      this->p_histograph=new T(name,title,nbinsx,xlow,xup,nbinsy,ylow,yup,option);
+      this->Detach();
+      this->SetObjectStat(false);
     }
+ 
+ 	THistoGraph (const char *name, const char *title, Int_t nbinsx, const Double_t *xbins, Int_t nbinsy, Double_t ylow, Double_t yup, Option_t *option="")
+  {
+      this->p_histograph=new T(name,title,nbinsx,xbins,nbinsy,ylow,yup,option);
+      this->Detach();
+      this->SetObjectStat(false);
+    }
+ 
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, const Double_t *ybins, Option_t *option="")
+  {
+      this->p_histograph=new T(name,title,nbinsx,xlow,xup,nbinsy,ybins,option);
+      this->Detach();
+      this->SetObjectStat(false);
+    }
+ 
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, const Double_t *xbins, Int_t nbinsy, const Double_t *ybins, Option_t *option="")
+  {
+      this->p_histograph=new T(name,title,nbinsx,xbins,nbinsy,ybins,option);
+      this->Detach();
+      this->SetObjectStat(false);
+    }
+virtual void 	Approximate (Bool_t approx=kTRUE)
+{
+    
+    this->p_histograph->Approximate(approx);
+}
+
+
+ 
+Int_t 	Fill (Double_t x, Double_t y, Double_t z)
+{
+    
+   return this->p_histograph->Fill(x,y,z);
+}
+virtual Int_t 	Fill (Double_t x, const char *namey, Double_t z)
+{
+    
+   return this->p_histograph->Fill(x,namey,z);
+}
+virtual Int_t 	Fill (const char *namex, Double_t y, Double_t z)
+{
+    
+   return this->p_histograph->Fill(namex,y,z);
+}
+ 
+virtual Int_t 	Fill (const char *namex, const char *namey, Double_t z)
+{
+    
+   return this->p_histograph->Fill(namex,namey,z);
+}
+ 
+virtual Int_t 	Fill (Double_t x, Double_t y, Double_t z, Double_t w)
+{
+    
+  return  this->p_histograph->Fill(x,y,z,w);
+}
+
+virtual void 	SetBins (Int_t nbinsx, Double_t xmin, Double_t xmax, Int_t nbinsy, Double_t ymin, Double_t ymax)
+{
+    
+  this->p_histograph->SetBins(nbinsx,xmin,xmax,nbinsy,ymin,ymax);
+}
+ 
+virtual void 	SetBins (Int_t nx, const Double_t *xBins, Int_t ny, const Double_t *yBins)
+{
+    
+  this->p_histograph->SetBins(nx,xBins,ny,yBins);
+}
+ 
+
+//TProfile
+void 	BuildOptions (Double_t ymin, Double_t ymax, Option_t *option){
+    
+  this->p_histograph->BuildOptions(ymin,ymax,option);
+}
+virtual Double_t 	GetBinEffectiveEntries (Int_t bin) const{
+    
+  return this->p_histograph->GetBinEffectiveEntries(bin);
+}
+virtual Double_t 	GetBinEntries (Int_t bin) const{
+    
+  return this->p_histograph->GetBinEntries(bin);
+}
+virtual TArrayD * 	GetBinSumw2 (){
+    
+  return this->p_histograph->GetBinSumw2 ();
+}
+virtual const TArrayD * 	GetBinSumw2 () const{
+    
+  return this->p_histograph->GetBinSumw2 ();
+}
+Option_t * 	GetErrorOption () const{
+    
+  return this->p_histograph->GetErrorOption ();
+}
+virtual Double_t 	GetYmax () const{
+    
+  return this->p_histograph->GetYmax ();
+}
+virtual Double_t 	GetYmin () const{
+    
+  return this->p_histograph->GetYmin ();
+}
+TH1D * 	ProjectionX (const char *name="_px", Option_t *option="e") const{
+    
+  return this->p_histograph->ProjectionX (name,option);
+}
+virtual void 	SetBinEntries (Int_t bin, Double_t w){
+    
+  this->p_histograph->SetBinEntries (bin,w);
+}
+virtual void 	SetErrorOption (Option_t *option=""){
+    
+  this->p_histograph->SetErrorOption (option);
+}
+
+virtual Double_t 	GetBinEffectiveEntries (Int_t bin){
+    
+  return this->p_histograph->GetBinEffectiveEntries (bin);
+}
+Double_t 	GetNumberOfBins (){
+    
+  return this->p_histograph->GetNumberOfBins ();
+}
+virtual Double_t 	GetZmax () const{
+    
+  return this->p_histograph->GetZmax ();
+}
+virtual Double_t 	GetZmin () const{
+    
+  return this->p_histograph->GetZmin ();
+}
+TH2D * 	ProjectionXY (const char *name="_pxy", Option_t *option="e") const{
+    
+  return this->p_histograph->ProjectionXY (name,option);
+}
 };
 
-template <typename T>
-class is_TProfile3D
-{
-  public :static const bool value =false;
-};
+template <typename T>class is_TProfile3D{public :static const bool value =false;};
 template <> class is_TProfile3D<TProfile3D>{ public :static const bool value =true ;};
 
 template< typename T> 
 class THistoGraph< T, typename std::enable_if<is_TProfile3D<T>::value,T>::type>:public THistoCommon<T>
 {
   public:
-    THistoGraph(){};
-    THistoGraph(const char* name,const char* title,int bin , Double_t  xmin, Double_t  xmax,int biny,  Double_t  ymin,  Double_t  ymax,int binz,  Double_t  zmin,  Double_t  zmax)
-    {
-      this->p_histograph=new T(name,title,bin,xmin,xmax,biny,ymin,ymax,binz,zmin,zmax);
+       	THistoGraph(const char *name, const char *title, Int_t nbinsx, Double_t xlow, Double_t xup, Int_t nbinsy, Double_t ylow, Double_t yup, Int_t nbinsz, Double_t zlow, Double_t zup, Option_t *option="")
+ 	      {
+      this->p_histograph=new T(name,title,nbinsx,xlow,xup,nbinsy,ylow,yup,nbinsz,zlow,zup,option);
       this->Detach();
       this->SetObjectStat(false);
     }
-    void Fill( Double_t  x,  Double_t  y, Double_t  z,  Double_t  t)
-    {
-      this->p_histograph->Fill(x,y,z,t);
+ 	THistoGraph(const char *name, const char *title, Int_t nbinsx, const Double_t *xbins, Int_t nbinsy, const Double_t *ybins, Int_t nbinsz, const Double_t *zbins, Option_t *option="")
+ 	      {
+      this->p_histograph=new T(name,title,nbinsx,xbins,nbinsy,ybins,nbinsz,zbins,option);
+      this->Detach();
+      this->SetObjectStat(false);
     }
-    void Fill( Double_t  x,Double_t  y,Double_t  z, Double_t  t, Double_t  w)
-    {
-      this->p_histograph->Fill(x,y,z,t,w);
+   THistoGraph ()
+      {
+      this->p_histograph=new T();
+      this->Detach();
+      this->SetObjectStat(false);
     }
+
+//TProfile
+void 	BuildOptions (Double_t ymin, Double_t ymax, Option_t *option){
+    
+  this->p_histograph->BuildOptions(ymin,ymax,option);
+}
+virtual Double_t 	GetBinEffectiveEntries (Int_t bin) const{
+    
+  return this->p_histograph->GetBinEffectiveEntries(bin);
+}
+virtual Double_t 	GetBinEntries (Int_t bin) const{
+    
+  return this->p_histograph->GetBinEntries(bin);
+}
+virtual TArrayD * 	GetBinSumw2 (){
+    
+  return this->p_histograph->GetBinSumw2 ();
+}
+virtual const TArrayD * 	GetBinSumw2 () const{
+    
+  return this->p_histograph->GetBinSumw2 ();
+}
+Option_t * 	GetErrorOption () const{
+    
+  return this->p_histograph->GetErrorOption ();
+}
+virtual Double_t 	GetYmax () const{
+    
+  return this->p_histograph->GetYmax ();
+}
+virtual Double_t 	GetYmin () const{
+    
+  return this->p_histograph->GetYmin ();
+}
+TH1D * 	ProjectionX (const char *name="_px", Option_t *option="e") const{
+    
+  return this->p_histograph->ProjectionX (name,option);
+}
+virtual void 	SetBinEntries (Int_t bin, Double_t w){
+    
+  this->p_histograph->SetBinEntries (bin,w);
+}
+virtual void 	SetErrorOption (Option_t *option=""){
+    
+  this->p_histograph->SetErrorOption (option);
+}
+
+virtual Double_t 	GetBinEffectiveEntries (Int_t bin){
+    
+  return this->p_histograph->GetBinEffectiveEntries (bin);
+}
+Double_t 	GetNumberOfBins (){
+    
+  return this->p_histograph->GetNumberOfBins ();
+}
+virtual Double_t 	GetZmax () const{
+    
+  return this->p_histograph->GetZmax ();
+}
+virtual Double_t 	GetZmin () const{
+    
+  return this->p_histograph->GetZmin ();
+}
+TH2D * 	ProjectionXY (const char *name="_pxy", Option_t *option="e") const{
+    
+  return this->p_histograph->ProjectionXY (name,option);
+}
+
+virtual void 	SetBins (Int_t nbinsx, Double_t xmin, Double_t xmax, Int_t nbinsy, Double_t ymin, Double_t ymax, Int_t nbinsz, Double_t zmin, Double_t zmax)
+{
+    
+  this->p_histograph->SetBins (nbinsx,xmin,xmax,nbinsy,ymin,ymax,nbinsz,zmin,zmax);
+}
+ 
+virtual void 	SetBins (Int_t nx, const Double_t *xBins, Int_t ny, const Double_t *yBins, Int_t nz, const Double_t *zBins)
+{
+    this->p_histograph->SetBins(nx,xBins,ny,yBins,nz,zBins);
+}
+
+
+
+virtual Double_t 	GetTmax () const{
+    return this->p_histograph->GetTmax ();
+}
+virtual Double_t 	GetTmin () const{
+   return  this->p_histograph->GetTmin ();
+}
+virtual TH3D * 	ProjectionXYZ (const char *name="_pxyz", Option_t *option="e") const{
+   return  this->p_histograph->ProjectionXYZ(name,option);
+}
+    
+
+    
+    
+    
 };
 #endif  

@@ -169,7 +169,7 @@ virtual Bool_t	IsBinUnderflow(Int_t bin) const;
   virtual    void	PutStats(Double_t* stats);
   virtual    TH1*	Rebin(Int_t ngroup = 2, const char* newname = "", const Double_t* xbins = 0);
    virtual   void	RebinAxis(Double_t x, TAxis* axis);
-   virtual   TH1*	RebinX(Int_t ngroup = 2, const char* newname = "");
+   //virtual   TH1*	RebinX(Int_t ngroup = 2, const char* newname = "");
    virtual   void	Rebuild(Option_t* option = "");
    virtual   void	RecursiveRemove(TObject* obj);
    virtual   void	Reset(Option_t* option = "");
@@ -237,6 +237,9 @@ virtual void	StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b);
    virtual void	Sumw2(Bool_t flag = kTRUE);
 virtual  TH1*	TransformHisto(TVirtualFFT* fft, TH1* h_output, Option_t* option);
    virtual   void	UseCurrentStyle();
+
+   
+   
 };
 template class THistoCommon<TH1C>;
 template class THistoCommon<TH1S>;

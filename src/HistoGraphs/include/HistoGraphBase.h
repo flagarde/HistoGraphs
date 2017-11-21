@@ -6,6 +6,7 @@
 #include "TH3.h"
 #include "TProfile.h"
 #include "TProfile2D.h"
+#include "TProfile3D.h"
 #include "TROOT.h"
 
 class HistoGraphBase
@@ -430,7 +431,18 @@ virtual Bool_t	IsBinUnderflow(Int_t bin) const{return false;};
    virtual  void	PutStats(Double_t* stats){};
    virtual  TH1*	Rebin(Int_t ngroup = 2, const char* newname = "", const Double_t* xbins = 0){return nullptr;};
    virtual  void	RebinAxis(Double_t x, TAxis* axis){};
-   virtual  TH1*	RebinX(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
+   TH1*	RebinX(Int_t ngroup = 2, const char* newname = "",TH1* a=nullptr){return a->RebinX(ngroup,newname);};
+   TH2*	RebinX(Int_t ngroup = 2, const char* newname = "",TH2* a=nullptr){return a->RebinX(ngroup,newname);};
+   TH3*	RebinX(Int_t ngroup = 2, const char* newname = "",TH3* a=nullptr){return a->RebinX(ngroup,newname);};
+  //TProfile*	RebinX(Int_t ngroup = 2, const char* newname = "",TProfile* a=nullptr){return a->RebinX(ngroup,newname);};
+   TProfile2D*	RebinX(Int_t ngroup = 2, const char* newname = "",TProfile2D* a=nullptr){return a->RebinX(ngroup,newname);};
+   //TProfile3D*	RebinX(Int_t ngroup = 2, const char* newname = "",TProfile3D* a=nullptr){return a->RebinX(ngroup,newname);};
+   TH2*	RebinY(Int_t ngroup = 2, const char* newname = "",TH2* a=nullptr){return a->RebinY(ngroup,newname);};
+   TH3*	RebinY(Int_t ngroup = 2, const char* newname = "",TH3* a=nullptr){return a->RebinY(ngroup,newname);};
+   TProfile2D*	RebinY(Int_t ngroup = 2, const char* newname = "",TProfile2D* a=nullptr){return a->RebinY(ngroup,newname);};
+  //TProfile3D*	RebinY(Int_t ngroup = 2, const char* newname = "",TProfile3D* a=nullptr){return a->RebinY(ngroup,newname);};
+    TH3*	RebinZ(Int_t ngroup = 2, const char* newname = "",TH3* a=nullptr){return a->RebinZ(ngroup,newname);};
+  // TProfile3D*	RebinZ(Int_t ngroup = 2, const char* newname = "",TProfile3D* a=nullptr){return a->RebinZ(ngroup,newname);};
    virtual  void	Rebuild(Option_t* option = ""){};
     virtual void	RecursiveRemove(TObject* obj){};
     virtual void	Reset(Option_t* option = ""){};
@@ -521,8 +533,8 @@ virtual void	SetDefaultSumw2(Bool_t sumw2 = kTRUE){};
     TH1D*	ProjectionY(const char* name = "_py", Int_t firstxbin = 0, Int_t lastxbin = -1, Option_t* option = "") const{return nullptr;};
     TH1D*	QuantilesX(Double_t prob = 0.5, const char* name = "_qx") const{return nullptr;};
     TH1D*	QuantilesY(Double_t prob = 0.5, const char* name = "_qy") const{return nullptr;};
-    virtual TH2*	Rebin2D(Int_t nxgroup = 2, Int_t nygroup = 2, const char* newname = ""){return nullptr;};
-    virtual TH2*	RebinY(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
+    TH2*	Rebin2D(Int_t nxgroup = 2, Int_t nygroup = 2, const char* newname = "",TH2* a=nullptr){return a->Rebin2D(nxgroup,nygroup,newname);};
+    TProfile2D*	Rebin2D(Int_t nxgroup = 2, Int_t nygroup = 2, const char* newname = "",TProfile2D* a=nullptr){return a->Rebin2D(nxgroup,nygroup,newname);};
     virtual void	SetShowProjectionX(Int_t nbins = 1){};
     virtual void	SetShowProjectionY(Int_t nbins = 1){};
 
@@ -540,23 +552,39 @@ virtual Double_t	GetBinErrorLow(Int_t binx, Int_t biny, Int_t binz){return -1.0;
 virtual Double_t	GetBinErrorUp(Int_t binx, Int_t biny, Int_t binz){return -1.0;};
 virtual Double_t	GetBinWithContent3(Double_t c, Int_t& binx, Int_t& biny, Int_t& binz, Int_t firstx = 0, Int_t lastx = 0, Int_t firsty = 0, Int_t lasty = 0, Int_t firstz = 0, Int_t lastz = 0, Double_t maxdiff = 0) const{return -1.0;};
 virtual void	GetRandom3(Double_t& x, Double_t& y, Double_t& z){};
+//virtual TH3*	RebinY(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
 TH1*	Project3D(Option_t* option = "x") const{return nullptr;};
 virtual TProfile2D*	Project3DProfile(Option_t* option = "xy") const{return nullptr;};
 TH1D*	ProjectionX(const char* name = "_px", Int_t iymin = 0, Int_t iymax = -1, Int_t izmin = 0, Int_t izmax = -1, Option_t* option = "") const{return nullptr;};
 TH1D*	ProjectionY(const char* name = "_py", Int_t ixmin = 0, Int_t ixmax = -1, Int_t izmin = 0, Int_t izmax = -1, Option_t* option = "") const{return nullptr;};
 TH1D*	ProjectionZ(const char* name = "_pz", Int_t ixmin = 0, Int_t ixmax = -1, Int_t iymin = 0, Int_t iymax = -1, Option_t* option = "") const{return nullptr;};
 virtual TH3*	Rebin3D(Int_t nxgroup = 2, Int_t nygroup = 2, Int_t nzgroup = 2, const char* newname = ""){return nullptr;};
-virtual TH3*	RebinZ(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
+//virtual TH3*	RebinZ(Int_t ngroup = 2, const char* newname = ""){return nullptr;};
 virtual void	SetShowProjection(const char* option = "xy", Int_t nbins = 1){};
 
-
-
-
-
-
-
-
-
+//TProfile
+void 	BuildOptions (Double_t ymin, Double_t ymax, Option_t *option){};
+virtual Double_t 	GetBinEffectiveEntries (Int_t bin) const{return -1.0;};
+virtual Double_t 	GetBinEntries (Int_t bin) const{return -1.0;};
+virtual TArrayD * 	GetBinSumw2 (){return nullptr;};
+virtual const TArrayD * 	GetBinSumw2 () const{return nullptr;};
+Option_t * 	GetErrorOption () const{return nullptr;};
+virtual Double_t 	GetYmax () const{return -1.0;};
+virtual Double_t 	GetYmin () const{return -1.0;};
+TH1D * 	ProjectionX (const char *name="_px", Option_t *option="e") const{return nullptr;};
+virtual void 	SetBinEntries (Int_t bin, Double_t w){};
+virtual void 	SetErrorOption (Option_t *option=""){};
+virtual void 	Approximate (Bool_t approx=kTRUE){};
+//TProfile2D
+virtual Double_t 	GetBinEffectiveEntries (Int_t bin){return -1.0;};
+Double_t 	GetNumberOfBins (){return -1.0;};
+virtual Double_t 	GetZmax () const{return -1.0;};
+virtual Double_t 	GetZmin () const{return -1.0;};
+TH2D * 	ProjectionXY (const char *name="_pxy", Option_t *option="e") const{return nullptr;};
+//TProfile3D
+virtual Double_t 	GetTmax () const{return -1;};
+virtual Double_t 	GetTmin () const{return -1;};
+virtual TH3D * 	ProjectionXYZ (const char *name="_pxyz", Option_t *option="e") const{return nullptr;};
 
 
 

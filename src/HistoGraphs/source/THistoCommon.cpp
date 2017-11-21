@@ -837,11 +837,6 @@ void	THistoCommon<T>::RebinAxis(Double_t x, TAxis* axis)
   this->p_histograph->RebinAxis(x,axis);
 } 
 template <typename T>
-TH1*	THistoCommon<T>::RebinX(Int_t ngroup, const char* newname)
-{
-  return this->p_histograph->RebinX(ngroup,newname);
-} 
-template <typename T>
 void	THistoCommon<T>::Rebuild(Option_t* option)
 {
   this->p_histograph->Rebuild(option);
@@ -1176,3 +1171,7 @@ void	THistoCommon<T>::UseCurrentStyle()
 {
   this->p_histograph->UseCurrentStyle();
 } 
+
+
+
+
