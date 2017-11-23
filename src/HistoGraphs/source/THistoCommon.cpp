@@ -60,13 +60,6 @@ Double_t	THistoCommon<T>::AndersonDarlingTest(const TH1* h2, Double_t& advalue) 
    return this->p_histograph->AndersonDarlingTest(h2,advalue);
 }
 
-template <typename T>
-void	THistoCommon<T>::Browse(TBrowser* b)
-{
-    this->p_histograph->Browse(b);
-}
-
-
 
 
 
@@ -103,11 +96,6 @@ Double_t	THistoCommon<T>::Chi2TestX(const TH1* h2, Double_t& chi2, Int_t& ndf, I
   return this->p_histograph->Chi2TestX(h2,chi2,ndf,igood,option,res);
 } 
 
-template <typename T>
-Double_t	THistoCommon<T>::Chisquare(TF1* f1, Option_t* option) const
-{
-  return this->p_histograph->Chisquare(f1,option);
-} 
 
 
 template <typename T>
@@ -147,11 +135,7 @@ void	THistoCommon<T>::DirectoryAutoAdd(TDirectory* dir)
   this->p_histograph->DirectoryAutoAdd(dir);
 } 
 
-template <typename T>
-Int_t	THistoCommon<T>::DistancetoPrimitive(Int_t px, Int_t py)
-{
-  return this->p_histograph->DistancetoPrimitive(px,py);
-} 
+
 
 template <typename T>
 Bool_t	THistoCommon<T>::Divide(const TH1* h1)
@@ -170,11 +154,7 @@ Bool_t	THistoCommon<T>::Divide(const TH1* h1, const TH1* h2, Double_t c1, Double
 {
   return this->p_histograph->Divide(h1,h2,c1,c2,option);
 } 
-template <typename T>
-void	THistoCommon<T>::Draw(Option_t* option)
-{
-  this->p_histograph->Draw(option);
-} 
+
 
 template <typename T>
 TH1*	THistoCommon<T>::DrawCopy(Option_t* option, const char* name_postfix) const
@@ -189,22 +169,11 @@ TH1*	THistoCommon<T>::DrawNormalized(Option_t* option, Double_t norm) const
 } 
 
 template <typename T>
-void	THistoCommon<T>::DrawPanel()
-{
-  this->p_histograph->DrawPanel();
-} 
-
-template <typename T>
 void	THistoCommon<T>::Eval(TF1* f1, Option_t* option)
 {
   this->p_histograph->Eval(f1,option);
 } 
 
-template <typename T>
-void	THistoCommon<T>::ExecuteEvent(Int_t event, Int_t px, Int_t py)
-{
-  this->p_histograph->ExecuteEvent(event,px,py);
-} 
 template <typename T>
 void	THistoCommon<T>::ExtendAxis(Double_t x, TAxis* axis)
 {
@@ -271,36 +240,13 @@ Int_t	THistoCommon<T>::FindLastBinAbove(Double_t threshold, Int_t axis) const
 {
   return this->p_histograph->FindLastBinAbove(threshold,axis);
 } 
-template <typename T>
-TObject*	THistoCommon<T>::FindObject(const char* name) const
-{
-  return this->p_histograph->FindObject(name);
-} 
-template <typename T>
-TObject*	THistoCommon<T>::FindObject(const TObject* obj) const
-{
-  return this->p_histograph->FindObject(obj);
-} 
-template <typename T>
-TFitResultPtr	THistoCommon<T>::Fit(const char* formula, Option_t* option, Option_t* goption, Double_t xmin, Double_t xmax)
-{
-  return this->p_histograph->Fit(formula,option,goption,xmin,xmax);
-} 
-template <typename T>
-TFitResultPtr	THistoCommon<T>::Fit(TF1* f1, Option_t* option, Option_t* goption, Double_t xmin, Double_t xmax)
-{
-  return this->p_histograph->Fit(f1,option,goption,xmin,xmax);
-} 
+
 template <typename T>
 Int_t	THistoCommon<T>::FitOptionsMake(Option_t* option, Foption_t& Foption)
 {
   return this->p_histograph->FitOptionsMake(option,Foption);
 } 
-template <typename T>
-void	THistoCommon<T>::FitPanel()
-{
-  this->p_histograph->FitPanel();
-} 
+
 template <typename T>
 TH1*	THistoCommon<T>::GetAsymmetry(TH1* h2, Double_t c2, Double_t dc2)
 {
@@ -476,11 +422,7 @@ Double_t	THistoCommon<T>::GetEntries() const
 {
   return this->p_histograph->GetEntries();
 } 
-template <typename T>
-TF1*	THistoCommon<T>::GetFunction(const char* name) const
-{
-  return this->p_histograph->GetFunction(name);
-} 
+
 template <typename T>
 Double_t*	THistoCommon<T>::GetIntegral()
 {
@@ -511,11 +453,7 @@ Float_t	THistoCommon<T>::GetLabelSize(Option_t* axis) const
 {
   return this->p_histograph->GetLabelSize(axis);
 } 
-template <typename T>
-TList*	THistoCommon<T>::GetListOfFunctions() const
-{
-  return this->p_histograph->GetListOfFunctions();
-} 
+
 template <typename T>
 void	THistoCommon<T>::GetLowEdge(Double_t* edge) const
 {
@@ -541,11 +479,7 @@ Double_t	THistoCommon<T>::GetMaximumStored() const
 {
   return this->p_histograph->GetMaximumStored();
 } 
-template <typename T>
-Double_t	THistoCommon<T>::GetMean(Int_t axis) const
-{
-  return this->p_histograph->GetMean(axis);
-} 
+
 template <typename T>
 Double_t	THistoCommon<T>::GetMeanError(Int_t axis) const
 {
@@ -626,11 +560,7 @@ Double_t	THistoCommon<T>::GetRandom() const
 {
   return this->p_histograph->GetRandom();
 } 
-template <typename T>
-Double_t	THistoCommon<T>::GetRMS(Int_t axis) const
-{
-  return this->p_histograph->GetRMS(axis);
-} 
+
 template <typename T>
 Double_t	THistoCommon<T>::GetRMSError(Int_t axis) const
 {
@@ -696,26 +626,7 @@ Float_t	THistoCommon<T>::GetTitleSize(Option_t* axis) const
 {
   return this->p_histograph->GetTitleSize(axis);
 } 
-template <typename T>
-TAxis*	THistoCommon<T>::GetXaxis()
-{
-  return this->p_histograph->GetXaxis();
-} 
-template <typename T>
-const TAxis*	THistoCommon<T>::GetXaxis() const
-{
-  return this->p_histograph->GetXaxis();
-} 
-template <typename T>
-TAxis*	THistoCommon<T>::GetYaxis()
-{
-  return this->p_histograph->GetYaxis();
-} 
-template <typename T>
-const TAxis*	THistoCommon<T>::GetYaxis() const
-{
-  return this->p_histograph->GetYaxis();
-} 
+
 template <typename T>
 TAxis*	THistoCommon<T>::GetZaxis()
 {
@@ -791,11 +702,7 @@ void	THistoCommon<T>::LabelsOption(Option_t* option, Option_t* axis)
 {
   this->p_histograph->LabelsOption(option,axis);
 } 
-template <typename T>
-Long64_t	THistoCommon<T>::Merge(TCollection* list)
-{
-  return this->Merge(list);
-} 
+
 template <typename T>
 Bool_t	THistoCommon<T>::Multiply(const TH1* h1)
 {
@@ -811,16 +718,7 @@ Bool_t	THistoCommon<T>::Multiply(const TH1* h1, const TH1* h2, Double_t c1, Doub
 {
   return this->p_histograph->Multiply(h1,h2,c1,c2,option);
 } 
-template <typename T>
-void	THistoCommon<T>::Paint(Option_t* option)
-{
-  this->p_histograph->Paint(option);
-} 
-template <typename T>
-void	THistoCommon<T>::Print(Option_t* option) const
-{
-  this->p_histograph->Print(option);
-} 
+
 template <typename T>
 void	THistoCommon<T>::PutStats(Double_t* stats)
 {
@@ -841,11 +739,7 @@ void	THistoCommon<T>::Rebuild(Option_t* option)
 {
   this->p_histograph->Rebuild(option);
 } 
-template <typename T>
-void	THistoCommon<T>::RecursiveRemove(TObject* obj)
-{
-  this->p_histograph->RecursiveRemove(obj);
-} 
+
 template <typename T>
 void	THistoCommon<T>::Reset(Option_t* option)
 {
@@ -856,11 +750,7 @@ void	THistoCommon<T>::ResetStats()
 {
   this->p_histograph->ResetStats();
 } 
-template <typename T>
-void	THistoCommon<T>::SavePrimitive(std::ostream& out, Option_t* option)
-{
-  this->p_histograph->SavePrimitive(out,option);
-} 
+
 template <typename T>
 void	THistoCommon<T>::Scale(Double_t c1, Option_t* option)
 {
@@ -1036,16 +926,7 @@ void	THistoCommon<T>::SetLabelSize(Float_t size, Option_t* axis)
 {
   this->p_histograph->SetLabelSize(size,axis);
 } 
-template <typename T>
-void	THistoCommon<T>::SetMaximum(Double_t maximum)
-{
-  this->p_histograph->SetMaximum(maximum);
-} 
-template <typename T>
-void	THistoCommon<T>::SetMinimum(Double_t minimum)
-{
-  this->p_histograph->SetMinimum(minimum);
-} 
+
 template <typename T>
 void	THistoCommon<T>::SetName(const char* name)
 {
@@ -1081,11 +962,7 @@ void	THistoCommon<T>::SetTickLength(Float_t length, Option_t* axis)
 {
   this->p_histograph->SetTickLength(length,axis);
 } 
-template <typename T>
-void	THistoCommon<T>::SetTitle(const char* title)
-{
-  this->p_histograph->SetTitle(title);
-} 
+
 template <typename T>
 void	THistoCommon<T>::SetTitleFont(Style_t font , Option_t* axis )
 {
@@ -1166,12 +1043,43 @@ TH1*	THistoCommon<T>::TransformHisto(TVirtualFFT* fft, TH1* h_output, Option_t* 
 {
   return TH1::TransformHisto(fft,h_output,option);
 } 
+
 template <typename T>
-void	THistoCommon<T>::UseCurrentStyle()
+void	THistoCommon<T>::DrawPanel()
 {
-  this->p_histograph->UseCurrentStyle();
+  this->p_histograph->DrawPanel();
 } 
 
+template <typename T>
+Double_t	THistoCommon<T>::GetMean(Int_t axis) const
+{
+  return this->p_histograph->GetMean(axis);
+} 
+template <typename T>
+Double_t	THistoCommon<T>::GetRMS(Int_t axis) const
+{
+  return this->p_histograph->GetRMS(axis);
+} 
+template <typename T>
+TFitResultPtr	THistoCommon<T>::Fit(const char* formula, Option_t* option, Option_t* goption, Double_t xmin, Double_t xmax)
+{
+  return this->p_histograph->Fit(formula,option,goption,xmin,xmax);
+} 
 
+template <typename T>
+TFitResultPtr	THistoCommon<T>::Fit(TF1* f1, Option_t* option, Option_t* goption, Double_t xmin, Double_t xmax)
+{
+  return this->p_histograph->Fit(f1,option,goption,xmin,xmax);
+} 
 
+template <typename T>
+Double_t	THistoCommon<T>::Chisquare(TF1* f1, Option_t* option) const
+{
+  return this->p_histograph->Chisquare(f1,option);
+} 
 
+template <typename T>
+TF1*	THistoCommon<T>::GetFunction(const char* name) const
+{
+  return this->p_histograph->GetFunction(name);
+} 

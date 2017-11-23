@@ -552,7 +552,7 @@ virtual Int_t 	Fill (Double_t x, Double_t y)
  
 virtual Int_t 	Fill (const char *namex, Double_t y)
 {
-   return  this->p_histograph->Fil(namex,y);
+   return  this->p_histograph->Fill(namex,y);
 }
  
 virtual Int_t 	Fill (Double_t x, Double_t y, Double_t w)
@@ -623,11 +623,11 @@ virtual void 	GetStats (Double_t *stats) const
     this->p_histograph->GetStats(stats);
 }
  
-virtual Double_t 	GetYmax () const
+virtual Double_t 	GetTmax () const
  {
   return   this->p_histograph->GetYmax();
 }
-virtual Double_t 	GetYmin () const
+virtual Double_t 	GetTmin () const
  {
    return  this->p_histograph->GetYmin();
 }
@@ -864,14 +864,6 @@ Option_t * 	GetErrorOption () const{
     
   return this->p_histograph->GetErrorOption ();
 }
-virtual Double_t 	GetYmax () const{
-    
-  return this->p_histograph->GetYmax ();
-}
-virtual Double_t 	GetYmin () const{
-    
-  return this->p_histograph->GetYmin ();
-}
 TH1D * 	ProjectionX (const char *name="_px", Option_t *option="e") const{
     
   return this->p_histograph->ProjectionX (name,option);
@@ -958,14 +950,6 @@ Option_t * 	GetErrorOption () const{
     
   return this->p_histograph->GetErrorOption ();
 }
-virtual Double_t 	GetYmax () const{
-    
-  return this->p_histograph->GetYmax ();
-}
-virtual Double_t 	GetYmin () const{
-    
-  return this->p_histograph->GetYmin ();
-}
 TH1D * 	ProjectionX (const char *name="_px", Option_t *option="e") const{
     
   return this->p_histograph->ProjectionX (name,option);
@@ -983,22 +967,10 @@ virtual Double_t 	GetBinEffectiveEntries (Int_t bin){
     
   return this->p_histograph->GetBinEffectiveEntries (bin);
 }
-Double_t 	GetNumberOfBins (){
+/*TH3D * 	ProjectionXYZ (const char *name="_pxy", Option_t *option="e") const{
     
-  return this->p_histograph->GetNumberOfBins ();
-}
-virtual Double_t 	GetZmax () const{
-    
-  return this->p_histograph->GetZmax ();
-}
-virtual Double_t 	GetZmin () const{
-    
-  return this->p_histograph->GetZmin ();
-}
-TH2D * 	ProjectionXY (const char *name="_pxy", Option_t *option="e") const{
-    
-  return this->p_histograph->ProjectionXY (name,option);
-}
+  return this->p_histograph->ProjectionXYZ (name,option);
+}*/
 
 virtual void 	SetBins (Int_t nbinsx, Double_t xmin, Double_t xmax, Int_t nbinsy, Double_t ymin, Double_t ymax, Int_t nbinsz, Double_t zmin, Double_t zmax)
 {

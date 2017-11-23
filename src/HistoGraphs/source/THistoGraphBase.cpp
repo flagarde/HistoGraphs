@@ -550,7 +550,123 @@ void THistoGraphBase<T>::SetObjectStat(Bool_t stat)
 {
   p_histograph->SetObjectStat(stat);
 }  
-//
+
+template <typename T> 
+void  THistoGraphBase<T>::Browse(TBrowser *b)
+{
+  p_histograph->Browse(b);
+}  
+
+
+
+template <typename T>
+Int_t	THistoGraphBase<T>::DistancetoPrimitive(Int_t px, Int_t py)
+{
+  return this->p_histograph->DistancetoPrimitive(px,py);
+} 
+
+
+
+
+template <typename T>
+void	THistoGraphBase<T>::ExecuteEvent(Int_t event, Int_t px, Int_t py)
+{
+  this->p_histograph->ExecuteEvent(event,px,py);
+} 
+
+
+template <typename T>
+TObject*	THistoGraphBase<T>::FindObject(const char* name) const
+{
+  return this->p_histograph->FindObject(name);
+} 
+template <typename T>
+TObject*	THistoGraphBase<T>::FindObject(const TObject* obj) const
+{
+  return this->p_histograph->FindObject(obj);
+} 
+
+
+template <typename T>
+void	THistoGraphBase<T>::FitPanel()
+{
+  this->p_histograph->FitPanel();
+} 
+
+template <typename T>
+TList*	THistoGraphBase<T>::GetListOfFunctions() const
+{
+  return this->p_histograph->GetListOfFunctions();
+} 
+
+
+template <typename T>
+TAxis*	THistoGraphBase<T>::GetXaxis()
+{
+  return this->p_histograph->GetXaxis();
+} 
+template <typename T>
+const TAxis*	THistoGraphBase<T>::GetXaxis() const
+{
+  return this->p_histograph->GetXaxis();
+} 
+template <typename T>
+TAxis*	THistoGraphBase<T>::GetYaxis()
+{
+  return this->p_histograph->GetYaxis();
+} 
+template <typename T>
+const TAxis*	THistoGraphBase<T>::GetYaxis() const
+{
+  return this->p_histograph->GetYaxis();
+} 
+template <typename T>
+Long64_t	THistoGraphBase<T>::Merge(TCollection* list)
+{
+  return this->Merge(list);
+} 
+template <typename T>
+void	THistoGraphBase<T>::Paint(Option_t* option)
+{
+  this->p_histograph->Paint(option);
+} 
+template <typename T>
+void	THistoGraphBase<T>::Print(Option_t* option) const
+{
+  this->p_histograph->Print(option);
+} 
+template <typename T>
+void	THistoGraphBase<T>::RecursiveRemove(TObject* obj)
+{
+  this->p_histograph->RecursiveRemove(obj);
+} 
+template <typename T>
+void	THistoGraphBase<T>::SavePrimitive(std::ostream& out, Option_t* option)
+{
+  this->p_histograph->SavePrimitive(out,option);
+} 
+template <typename T>
+void	THistoGraphBase<T>::SetMaximum(Double_t maximum)
+{
+  this->p_histograph->SetMaximum(maximum);
+} 
+template <typename T>
+void	THistoGraphBase<T>::SetMinimum(Double_t minimum)
+{
+  this->p_histograph->SetMinimum(minimum);
+} 
+template <typename T>
+void	THistoGraphBase<T>::SetTitle(const char* title)
+{
+  this->p_histograph->SetTitle(title);
+} 
+template <typename T>
+void	THistoGraphBase<T>::UseCurrentStyle()
+{
+  this->p_histograph->UseCurrentStyle();
+} 
+
+
 template class THistoGraphBase<TH1C>;
 template class THistoGraphBase<TH1S>;
 template class THistoGraphBase<TH1I>;

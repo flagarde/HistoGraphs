@@ -21,28 +21,22 @@ class THistoCommon: public THistoGraphBase<T>
     virtual  Bool_t	AddDirectoryStatus();
     virtual Double_t	AndersonDarlingTest(const TH1* h2, Option_t* option = "") const;
     virtual Double_t	AndersonDarlingTest(const TH1* h2, Double_t& advalue) const;
-    virtual void	Browse(TBrowser* b);
     virtual Int_t	BufferEmpty(Int_t action = 0);
     virtual Bool_t	CanExtendAllAxes() const;
     virtual Double_t	Chi2Test(const TH1* h2, Option_t* option = "UU", Double_t* res = 0) const;
     virtual Double_t	Chi2TestX(const TH1* h2, Double_t& chi2, Int_t& ndf, Int_t& igood, Option_t* option = "UU", Double_t* res = 0) const;
-    virtual Double_t	Chisquare(TF1* f1, Option_t* option = "") const;
     virtual  TClass*	Class();
     virtual void	ClearUnderflowAndOverflow();
     virtual TObject*	Clone(const char* newname = 0) const;
     virtual Double_t	ComputeIntegral(Bool_t onlyPositive = false);
     virtual void	Copy(TObject& hnew) const;
     virtual void	DirectoryAutoAdd(TDirectory*);
-    virtual Int_t	DistancetoPrimitive(Int_t px, Int_t py);
     virtual Bool_t	Divide(const TH1* h1);
     virtual Bool_t	Divide(TF1* f1, Double_t c1 = 1);
     virtual Bool_t	Divide(const TH1* h1, const TH1* h2, Double_t c1 = 1, Double_t c2 = 1, Option_t* option = "");
-    virtual void	Draw(Option_t* option = "");
     virtual TH1*	DrawCopy(Option_t* option = "", const char* name_postfix = "_copy") const;
     virtual TH1*	DrawNormalized(Option_t* option = "", Double_t norm = 1) const;
-    virtual void	DrawPanel();
     virtual void	Eval(TF1* f1, Option_t* option = "");
-    virtual void	ExecuteEvent(Int_t event, Int_t px, Int_t py);
     virtual void	ExtendAxis(Double_t x, TAxis* axis);
     virtual TH1*	FFT(TH1* h_output, Option_t* option);
     //Int_t	Fill(Double_t x);
@@ -56,12 +50,7 @@ class THistoCommon: public THistoGraphBase<T>
     virtual Int_t	FindFirstBinAbove(Double_t threshold = 0, Int_t axis = 1) const;
     virtual Int_t	FindFixBin(Double_t x, Double_t y = 0, Double_t z = 0) const;
     virtual Int_t	FindLastBinAbove(Double_t threshold = 0, Int_t axis = 1) const;
-    virtual TObject*	FindObject(const char* name) const;
-    virtual TObject*	FindObject(const TObject* obj) const;
-    virtual TFitResultPtr	Fit(const char* formula, Option_t* option = "", Option_t* goption = "", Double_t xmin = 0, Double_t xmax = 0);
-    virtual TFitResultPtr	Fit(TF1* f1, Option_t* option = "", Option_t* goption = "", Double_t xmin = 0, Double_t xmax = 0);
     virtual Int_t	FitOptionsMake(Option_t* option, Foption_t& Foption);
-    virtual void	FitPanel();
     virtual TH1*	GetAsymmetry(TH1* h2, Double_t c2 = 1, Double_t dc2 = 0);
      virtual Color_t	GetAxisColor(Option_t* axis = "X") const;
     virtual  Float_t	GetBarOffset() const;
@@ -97,20 +86,20 @@ virtual  Bool_t	GetDefaultSumw2();
 virtual TDirectory*	GetDirectory() const;
    virtual   Double_t	GetEffectiveEntries() const;
     virtual  Double_t	GetEntries() const;
-   virtual   TF1*	GetFunction(const char* name) const;
+   
    virtual   Double_t*	GetIntegral();
     virtual  Double_t	GetKurtosis(Int_t axis = 1) const;
    virtual   Color_t	GetLabelColor(Option_t* axis = "X") const;
    virtual   Style_t	GetLabelFont(Option_t* axis = "X") const;
    virtual   Float_t	GetLabelOffset(Option_t* axis = "X") const;
    virtual   Float_t	GetLabelSize(Option_t* axis = "X") const;
-virtual TList*	GetListOfFunctions() const;
+
    virtual  void	GetLowEdge(Double_t* edge) const;
    virtual   Double_t	GetMaximum(Double_t maxval = 3.40282347E+38F) const;
   virtual    Int_t	GetMaximumBin() const;
   virtual    Int_t	GetMaximumBin(Int_t& locmax, Int_t& locmay, Int_t& locmaz) const;
   virtual    Double_t	GetMaximumStored() const;
-  virtual    Double_t	GetMean(Int_t axis = 1) const;
+  
   virtual    Double_t	GetMeanError(Int_t axis = 1) const;
   virtual    Double_t	GetMinimum(Double_t minval = -3.40282347E+38F) const;
    virtual   Int_t	GetMinimumBin() const;
@@ -127,7 +116,7 @@ virtual TList*	GetListOfFunctions() const;
 virtual TVirtualHistPainter*	GetPainter(Option_t* option = "");
    virtual   Int_t	GetQuantiles(Int_t nprobSum, Double_t* q, const Double_t* probSum = 0);
    virtual   Double_t	GetRandom() const;
-virtual Double_t	GetRMS(Int_t axis = 1) const;
+
 virtual Double_t	GetRMSError(Int_t axis = 1) const;
    virtual   Double_t	GetSkewness(Int_t axis = 1) const;
    virtual   void	GetStats(Double_t* stats) const;
@@ -141,10 +130,7 @@ virtual Double_t	GetRMSError(Int_t axis = 1) const;
    virtual   Style_t	GetTitleFont(Option_t* axis = "X") const;
    virtual   Float_t	GetTitleOffset(Option_t* axis = "X") const;
    virtual   Float_t	GetTitleSize(Option_t* axis = "X") const;
-virtual TAxis*	GetXaxis();
-virtual const TAxis*	GetXaxis() const;
-virtual TAxis*	GetYaxis();
-virtual const TAxis*	GetYaxis() const;
+
 virtual TAxis*	GetZaxis();
 virtual const TAxis*	GetZaxis() const;
   virtual    Double_t	Integral(Option_t* option = "") const;
@@ -160,21 +146,20 @@ virtual Bool_t	IsBinUnderflow(Int_t bin) const;
    virtual   void	LabelsDeflate(Option_t* axis = "X");
    virtual   void	LabelsInflate(Option_t* axis = "X");
    virtual   void	LabelsOption(Option_t* option = "h", Option_t* axis = "X");
-   virtual   Long64_t	Merge(TCollection* list);
+   
    virtual   Bool_t	Multiply(const TH1* h1);
    virtual   Bool_t	Multiply(TF1* h1, Double_t c1 = 1);
    virtual   Bool_t	Multiply(const TH1* h1, const TH1* h2, Double_t c1 = 1, Double_t c2 = 1, Option_t* option = "");
-  virtual    void	Paint(Option_t* option = "");
-   virtual   void	Print(Option_t* option = "") const;
+
   virtual    void	PutStats(Double_t* stats);
   virtual    TH1*	Rebin(Int_t ngroup = 2, const char* newname = "", const Double_t* xbins = 0);
    virtual   void	RebinAxis(Double_t x, TAxis* axis);
    //virtual   TH1*	RebinX(Int_t ngroup = 2, const char* newname = "");
    virtual   void	Rebuild(Option_t* option = "");
-   virtual   void	RecursiveRemove(TObject* obj);
+
    virtual   void	Reset(Option_t* option = "");
   virtual    void	ResetStats();
-   virtual   void	SavePrimitive(std::ostream& out, Option_t* option = "");
+   
    virtual   void	Scale(Double_t c1 = 1, Option_t* option = "");
    virtual   void	SetAxisColor(Color_t color = 1, Option_t* axis = "X");
    virtual   void	SetAxisRange(Double_t xmin, Double_t xmax, Option_t* axis = "X");
@@ -210,8 +195,7 @@ virtual  void	SetDefaultSumw2(Bool_t sumw2 = kTRUE);
    virtual   void	SetLabelFont(Style_t font = 62, Option_t* axis = "X");
    virtual   void	SetLabelOffset(Float_t offset = 0.0050000000000000001, Option_t* axis = "X");
    virtual   void	SetLabelSize(Float_t size = 0.02, Option_t* axis = "X");
-   virtual   void	SetMaximum(Double_t maximum = -1111);
-   virtual   void	SetMinimum(Double_t minimum = -1111);
+
    virtual   void	SetName(const char* name);
    virtual   void	SetNameTitle(const char* name, const char* title);
    virtual   void	SetNdivisions(Int_t n = 510, Option_t* axis = "X");
@@ -219,7 +203,7 @@ virtual  void	SetDefaultSumw2(Bool_t sumw2 = kTRUE);
   virtual    void	SetOption(Option_t* option = " ");
   virtual    void	SetStats(Bool_t stats = kTRUE);
    virtual   void	SetTickLength(Float_t length = 0.02, Option_t* axis = "X");
-   virtual   void	SetTitle(const char* title);
+ 
    virtual   void	SetTitleFont(Style_t font = 62, Option_t* axis = "X");
   virtual    void	SetTitleOffset(Float_t offset = 1, Option_t* axis = "X");
    virtual   void	SetTitleSize(Float_t size = 0.02, Option_t* axis = "X");
@@ -236,9 +220,16 @@ virtual  void	StatOverflows(Bool_t flag = kTRUE);
 virtual void	StreamerNVirtual(TBuffer& ClassDef_StreamerNVirtual_b);
    virtual void	Sumw2(Bool_t flag = kTRUE);
 virtual  TH1*	TransformHisto(TVirtualFFT* fft, TH1* h_output, Option_t* option);
-   virtual   void	UseCurrentStyle();
 
-   
+  virtual void	DrawPanel();
+    Double_t	GetMean(Int_t axis) const;
+
+    Double_t	GetRMS(Int_t axis) const;
+
+     virtual  TFitResultPtr	Fit(const char* formula, Option_t* option = "", Option_t* goption = "", Double_t xmin = 0, Double_t xmax = 0);
+   virtual TF1*	GetFunction(const char* name) const;
+      virtual  TFitResultPtr	Fit(TF1* f1, Option_t* option = "", Option_t* goption = "", Double_t xmin = 0, Double_t xmax = 0);
+          virtual Double_t	Chisquare(TF1* f1, Option_t* option = "") const;
    
 };
 template class THistoCommon<TH1C>;

@@ -1,6 +1,8 @@
 #ifndef HISTO_PLANE
 #define HISTO_PLANE
-#include "HistoGraphs.h"
+#include "HistoGraphBase.h"
+#include "THistoCommon.h"
+#include "TGraphCommon.h"
 #include "TFile.h"
 #include <string>
 #include <map>

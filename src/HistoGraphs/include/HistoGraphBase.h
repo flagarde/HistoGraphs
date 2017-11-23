@@ -564,12 +564,12 @@ virtual TH3*	Rebin3D(Int_t nxgroup = 2, Int_t nygroup = 2, Int_t nzgroup = 2, co
 virtual void	SetShowProjection(const char* option = "xy", Int_t nbins = 1){};
 
 //TProfile
-void 	BuildOptions (Double_t ymin, Double_t ymax, Option_t *option){};
+virtual void 	BuildOptions (Double_t ymin, Double_t ymax, Option_t *option){};
 virtual Double_t 	GetBinEffectiveEntries (Int_t bin) const{return -1.0;};
 virtual Double_t 	GetBinEntries (Int_t bin) const{return -1.0;};
 virtual TArrayD * 	GetBinSumw2 (){return nullptr;};
 virtual const TArrayD * 	GetBinSumw2 () const{return nullptr;};
-Option_t * 	GetErrorOption () const{return nullptr;};
+virtual Option_t * 	GetErrorOption () const{return nullptr;};
 virtual Double_t 	GetYmax () const{return -1.0;};
 virtual Double_t 	GetYmin () const{return -1.0;};
 TH1D * 	ProjectionX (const char *name="_px", Option_t *option="e") const{return nullptr;};
@@ -578,10 +578,10 @@ virtual void 	SetErrorOption (Option_t *option=""){};
 virtual void 	Approximate (Bool_t approx=kTRUE){};
 //TProfile2D
 virtual Double_t 	GetBinEffectiveEntries (Int_t bin){return -1.0;};
-Double_t 	GetNumberOfBins (){return -1.0;};
+virtual Double_t 	GetNumberOfBins (){return -1.0;};
 virtual Double_t 	GetZmax () const{return -1.0;};
 virtual Double_t 	GetZmin () const{return -1.0;};
-TH2D * 	ProjectionXY (const char *name="_pxy", Option_t *option="e") const{return nullptr;};
+virtual TH2D * 	ProjectionXY (const char *name="_pxy", Option_t *option="e") const{return nullptr;};
 //TProfile3D
 virtual Double_t 	GetTmax () const{return -1;};
 virtual Double_t 	GetTmin () const{return -1;};
@@ -589,7 +589,7 @@ virtual TH3D * 	ProjectionXYZ (const char *name="_pxyz", Option_t *option="e") c
 
 
 ///TGraph
-    virtual void 	Apply (TF1 *f){};
+virtual void 	Apply (TF1 *f){};
 virtual void 	ComputeRange (Double_t &xmin, Double_t &ymin, Double_t &xmax, Double_t &ymax) const{};
 virtual void 	DrawGraph (Int_t n, const Int_t *x, const Int_t *y, Option_t *option=""){};
 virtual void 	DrawGraph (Int_t n, const Float_t *x, const Float_t *y, Option_t *option=""){};
@@ -601,7 +601,7 @@ virtual Double_t 	GetCorrelationFactor () const{return -1.0;};
 virtual Double_t 	GetCovariance () const{return -1.0;};
 virtual Bool_t 	GetEditable () const{return false;};
 virtual Double_t 	GetErrorX (Int_t bin) const{return -1.0;};
-virtual Double_t 	GetErrorXhigh (Int_t bin) const {return -1.0;};
+virtual Double_t 	GetErrorXhigh (Int_t bin) const{return -1.0;};
 virtual Double_t 	GetErrorXlow (Int_t bin) const{return -1.0;};
 virtual Double_t 	GetErrorY (Int_t bin) const{return -1.0;};
 virtual Double_t 	GetErrorYhigh (Int_t bin) const{return -1.0;};
@@ -622,14 +622,12 @@ virtual Int_t 	GetMaxSize () const{return -1;};
 virtual Double_t 	GetMinimum () const{return -1.0;};
 virtual Int_t 	GetN () const{return -1;};
 virtual Int_t 	GetPoint (Int_t i, Double_t &x, Double_t &y) const{return -1;};
-virtual Double_t * 	GetX () const{return nullptr;};
-virtual Double_t * 	GetY () const{return nullptr;};
 virtual void 	InitExpo (Double_t xmin=0, Double_t xmax=0){};
 virtual void 	InitGaus (Double_t xmin=0, Double_t xmax=0){};
 virtual void 	InitPolynom (Double_t xmin=0, Double_t xmax=0){};
 virtual Int_t 	InsertPoint (){return -1;};
 virtual void 	InsertPointBefore (Int_t ipoint, Double_t x, Double_t y){};
-virtual Double_t 	Integral (Int_t first=0, Int_t last=-1) const{return -1.0;};
+virtual Double_t 	Integral (Int_t first=0, Int_t last=-1) const{return -1.;};
 virtual Bool_t 	IsEditable () const{return false;};
 virtual Int_t 	IsInside (Double_t x, Double_t y) const{return -1;};
 virtual void 	LeastSquareFit (Int_t m, Double_t *a, Double_t xmin=0, Double_t xmax=0){};
@@ -645,10 +643,23 @@ virtual void 	SetHistogram (TH1F *h){};
 virtual void 	SetPoint (Int_t i, Double_t x, Double_t y){};
 virtual void 	Sort (Bool_t(*greater)(const TGraph *, Int_t, Int_t)=&TGraph::CompareX, Bool_t ascending=kTRUE, Int_t low=0, Int_t high=-1111){};
 virtual void 	Zero (Int_t &k, Double_t AZ, Double_t BZ, Double_t E2, Double_t &X, Double_t &Y, Int_t maxiterations){};
+
 virtual Bool_t 	CompareArg (const TGraph *gr, Int_t left, Int_t right){return false;};
 virtual Bool_t 	CompareRadius (const TGraph *gr, Int_t left, Int_t right){return false;};
 virtual Bool_t 	CompareX (const TGraph *gr, Int_t left, Int_t right){return false;};
 virtual Bool_t 	CompareY (const TGraph *gr, Int_t left, Int_t right){return false;};
+//TGraphErrors
+virtual void 	SetPointError (Double_t ex, Double_t ey){};
+virtual void 	SetPointError (Int_t i, Double_t ex, Double_t ey){};
+//TGraphAsymmErrors
+virtual void 	BayesDivide (const TH1 *pass, const TH1 *total, Option_t *opt=""){};
+virtual void 	SetPointError (Double_t exl, Double_t exh, Double_t eyl, Double_t eyh){};
+virtual void 	SetPointError (Int_t i, Double_t exl, Double_t exh, Double_t eyl, Double_t eyh){};
+virtual void 	SetPointEXhigh (Int_t i, Double_t exh){};
+virtual void 	SetPointEXlow (Int_t i, Double_t exl){};
+virtual void 	SetPointEYhigh (Int_t i, Double_t eyh){};
+virtual void 	SetPointEYlow (Int_t i, Double_t eyl){};
+
 
     virtual ~HistoGraphBase();
 };
