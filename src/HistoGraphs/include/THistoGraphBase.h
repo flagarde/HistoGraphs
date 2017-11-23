@@ -16,6 +16,7 @@
 #include "TGraphBentErrors.h"
 #include "TGraphPolar.h"
 #include "TGraphQQ.h"
+#include "TMultiGraph.h"
 
 template <typename T>
 class THistoGraphBase: public HistoGraphBase
